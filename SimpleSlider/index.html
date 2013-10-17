@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Simple Slider Demo</title>
+    <style type="text/css">
+        * {margin: 0;padding: 0}
+        a {
+            color: #005689;
+            text-decoration: none;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #333;
+        }
+        .wrap {width: 640px}
+        .related-news-detail {
+            border-top: 3px solid #DA251D;
+            margin-bottom: 10px;
+        }
+        .related-news-detail .headerbox {
+            height: 30px;
+            width: 100%;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .related-news-detail .headerbox h1 {
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            font-size: 18px;
+            color: #333333;
+        }
+        .group-button {
+            display: inline-block;
+            width: 49px;
+            height: 23px;
+            float: right;
+        }
+        .group-button a {
+            display: block;
+            outline: none;
+            width: 23px;
+            text-indent: -9999%;
+            height: 23px;
+            background: url(./images/nex-prev.png) no-repeat;
+        }
+        .group-button a.prev {
+            background-position: 0 0;
+            float: left;
+        }
+        .group-button a.next {
+            background-position: -26px 0;
+            float: right;
+        }
+        .jcarousel {
+            width: 642px;
+            height: 170px;
+            position: relative;
+            overflow: hidden;
+        }
+        #maskjcarousel {
+            display: inline-block;
+            width: 5000px;
+            height: 170px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: absolute;
+        }
+        #maskjcarousel li {
+            float: left;
+            display: inline-block;
+            width: 153px;
+            height: 170px;
+            margin-right: 10px;
+        }
+        #maskjcarousel li a.photo {
+            display: block;
+            outline: none;
+            width: 153px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div style="padding: 50px 0 0 50px">
+    <div class="wrap">
+        <div class="related-news-detail">
+            <div class="headerbox">
+                <h1>Có thể bạn quan tâm</h1>
+                <div class="group-button">
+                    <a href="javascript:void(0);" class="prev" id="slprev">Prev</a>
+                    <a href="javascript:void(0);" class="next" id="slnext">Next</a>
+                </div>
+            </div>
+            <div class="jcarousel">
+                <ul id="maskjcarousel">
+                    <li>
+                        <a href="#" title="Vua bán gạo lẻ" class="photo">
+                            <img src="asset/media/thumb.jpg" width="153" height="100" alt="Vua bán gạo lẻ">
+                        </a>
+                        <h3><a href="#" title="Vua bán gạo lẻ">&quot;Vua&quot; bán gạo lẻ</a></h3>
+                    </li>
+                    <li>
+                        <a href="#" title="Nữ doanh nhân và quyền lực mềm" class="photo">
+                            <img src="asset/media/thumb.jpg" width="153" height="100" alt="Nữ doanh nhân và quyền lực mềm">
+                        </a>
+                        <h3><a href="#" title="Nữ doanh nhân và quyền lực mềm">Nữ doanh nhân và quyền lực mềm</a></h3>
+                    </li>
+                    <li>
+                        <a href="#" title="Doanh nhân 8X, thu nhập 4.000 USD/tháng từ... thời sinh viên" class="photo">
+                            <img src="asset/media/thumb.jpg" width="153" height="100" alt="Doanh nhân 8X, thu nhập 4.000 USD/tháng từ... thời sinh viên">
+                        </a>
+                        <h3><a href="#" title="Doanh nhân 8X, thu nhập 4.000 USD/tháng từ... thời sinh viên">Doanh nhân 8X, thu nhập 4.000 USD/tháng từ... thời sinh viên</a></h3>
+                    </li>
+                    <li>
+                        <a href="" title="Từ hầu bàn trở thành nữ chủ tịch công ty tỉ đô" class="photo">
+                            <img src="asset/media/thumb.jpg" width="153" height="100" alt="Từ hầu bàn trở thành nữ chủ tịch công ty tỉ đô">
+                        </a>
+                        <h3><a href="" title="Từ hầu bàn trở thành nữ chủ tịch công ty tỉ đô">Từ hầu bàn trở thành nữ chủ tịch công ty tỉ đô</a></h3>
+                    </li>
+                    <li>
+                        <a href="" title="Bí quyết của bà Khanh" class="photo">
+                            <img src="asset/media/thumb.jpg" width="153" height="100" alt="Bí quyết của bà Khanh">
+                        </a>
+                        <h3><a href="" title="Bí quyết của bà Khanh">Bí quyết của bà Khanh</a></h3>
+                    </li>
+                    <li>
+                        <a href="" title="Tai nạn tạo ra một triệu phú USD" class="photo">
+                            <img src="asset/media/thumb.jpg" width="153" height="100" alt="Tai nạn tạo ra một triệu phú USD">
+                        </a>
+                        <h3><a href="" title="Tai nạn tạo ra một triệu phú USD">Tai nạn tạo ra một triệu phú USD</a></h3>
+                    </li>
+                    <li>
+                        <a href="" title="Kinh doanh để thử thách bản thân" class="photo">
+                            <img src="asset/media/thumb.jpg" width="153" height="100" alt="Kinh doanh để thử thách bản thân">
+                        </a>
+                        <h3>
+                            <a href="" title="Kinh doanh để thử thách bản thân">Kinh doanh để thử thách bản thân</a></h3>
+                    </li>
+                    <li>
+                        <a href="#" title="Vua bánh pía" class="photo"><img src="asset/media/thumb.jpg" width="153" height="100" alt="Vua bánh pía"></a>
+                        <h3><a href="#" title="Vua bánh pía">Vua bánh pía</a></h3>
+                    </li>
+                    <li>
+                        <a href="" title="Từ cú lừa trên mạng đến doanh thu 20 tỷ đồng/năm" class="photo">
+                            <img src="asset/media/thumb.jpg" width="153" height="100" alt="Từ cú lừa trên mạng đến doanh thu 20 tỷ đồng/năm">
+                        </a>
+                        <h3><a href="#" title="Từ cú lừa trên mạng đến doanh thu 20 tỷ đồng/năm">Từ cú lừa trên mạng đến doanh thu 20 tỷ đồng/năm</a></h3>
+                    </li>
+                    <li>
+                        <a href="#" title="Chàng trai gốc Việt làm giàu nhờ các bản thuyết trình" class="photo">
+                            <img src="asset/media/thumb.jpg" width="153" height="100" alt="Chàng trai gốc Việt làm giàu nhờ các bản thuyết trình">
+                        </a>
+                        <h3><a href="#" title="Chàng trai gốc Việt làm giàu nhờ các bản thuyết trình">Chàng trai gốc Việt làm giàu nhờ các bản thuyết trình</a></h3>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/simple_slider.js"></script>
+</body>
+</html>
