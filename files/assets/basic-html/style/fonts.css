@@ -1,0 +1,235 @@
+﻿
+        .font1 {
+        font-size: 24px;
+        font-family: "MyriadPro";
+        color: #40464E ;
+        opacity: 1 ;
+        }
+        .font1 a {
+        text-decoration: none;
+        color: #40464E;
+        }
+        .font1 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font1 a:visited {
+        color: #900060;
+        }
+      
+        .font2 {
+        font-size: 11px;
+        font-family: "MyriadPro";
+        color: #4D4D4D ;
+        opacity: 1 ;
+        }
+        .font2 a {
+        text-decoration: none;
+        color: #4D4D4D;
+        }
+        .font2 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font2 a:visited {
+        color: #900060;
+        }
+      
+        .font3 {
+        font-size: 11px;
+        font-family: "MyriadPro";
+        color: #343434 ;
+        opacity: 1 ;
+        }
+        .font3 a {
+        text-decoration: none;
+        color: #343434;
+        }
+        .font3 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font3 a:visited {
+        color: #900060;
+        }
+      
+        .font4 {
+        font-size: 27px;
+        font-family: "Geogrotesque";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font4 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font4 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font4 a:visited {
+        color: #900060;
+        }
+      
+        .font5 {
+        font-size: 24px;
+        font-family: "Geogrotesque";
+        color: #40464F ;
+        opacity: 1 ;
+        }
+        .font5 a {
+        text-decoration: none;
+        color: #40464F;
+        }
+        .font5 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font5 a:visited {
+        color: #900060;
+        }
+      
+        .font6 {
+        font-size: 12px;
+        font-family: "MyriadPro";
+        color: #343434 ;
+        opacity: 1 ;
+        }
+        .font6 a {
+        text-decoration: none;
+        color: #343434;
+        }
+        .font6 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font6 a:visited {
+        color: #900060;
+        }
+      
+        .font7 {
+        font-size: 8px;
+        font-family: "MyriadPro";
+        color: #4D4D4D ;
+        opacity: 1 ;
+        }
+        .font7 a {
+        text-decoration: none;
+        color: #4D4D4D;
+        }
+        .font7 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font7 a:visited {
+        color: #900060;
+        }
+      
+        .font8 {
+        font-size: 8px;
+        font-family: "MyriadPro";
+        color: #808080 ;
+        opacity: 1 ;
+        }
+        .font8 a {
+        text-decoration: none;
+        color: #808080;
+        }
+        .font8 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font8 a:visited {
+        color: #900060;
+        }
+      
+        .font9 {
+        font-size: 14px;
+        font-family: "MyriadPro";
+        color: #80977A ;
+        opacity: 1 ;
+        }
+        .font9 a {
+        text-decoration: none;
+        color: #80977A;
+        }
+        .font9 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font9 a:visited {
+        color: #900060;
+        }
+      
+        .font10 {
+        font-size: 10px;
+        font-family: "MyriadPro";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font10 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font10 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font10 a:visited {
+        color: #900060;
+        }
+      
+        .font11 {
+        font-size: 9px;
+        font-family: "MyriadPro";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font11 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font11 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font11 a:visited {
+        color: #900060;
+        }
+      
+        .font12 {
+        font-size: 9px;
+        font-family: "MyriadPro";
+        color: #40464E ;
+        opacity: 1 ;
+        }
+        .font12 a {
+        text-decoration: none;
+        color: #40464E;
+        }
+        .font12 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font12 a:visited {
+        color: #900060;
+        }
+      
+        .font13 {
+        font-size: 9px;
+        font-family: "MyriadPro";
+        color: #343434 ;
+        opacity: 1 ;
+        }
+        .font13 a {
+        text-decoration: none;
+        color: #343434;
+        }
+        .font13 a:hover {
+        text-decoration: none;
+        background-color: rgba(117,134,156,0.5);
+        }
+        .font13 a:visited {
+        color: #900060;
+        }
+      

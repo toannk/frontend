@@ -1,0 +1,105 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Product Guide" />
+    <meta name="keywords" content="" />
+    <meta property="og:title" content="Product Guide" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="../flash/pages/page0001_s.jpg" />
+    <meta property="og:url" content="../../../index.html" />
+    <title>Product Guide</title>
+    <link href="style/basic_style.css" type="text/css" rel="stylesheet" />
+    <link href="style/fonts.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="javascript/toc.js"></script>
+    <script type="text/javascript" src="javascript/pages.js"></script>
+    <script type="text/javascript" src="javascript/properties.js"></script>
+    <script type="text/javascript" src="javascript/basic.js"></script>
+    <script type="text/javascript" src="javascript/init.js"></script>
+
+
+    <!--[if lte IE 8]>
+    <script>
+      document.createElement('header');
+      document.createElement('nav');
+      document.createElement('section');
+      document.createElement('article');
+      document.createElement('aside');
+      document.createElement('footer');
+      document.createElement('hgroup');
+    </script>
+    <style type='text/css'>
+      #toolbar, #thumbBox, #zoomBox, #shareBox, #thumbBtn  {background: url("./style/bg_opacity.png");}
+    </style>
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+    <style type='text/css'>
+        #Navigation {display: block; width: 250px;}
+        #thumbBtn  {top: -28px;};
+        #thumbBox  {bottom: -100px;}
+    </style>
+    <![endif]-->
+    </head>
+  <body onkeydown="pager.changeStateByKey(event);" onmousedown="download.hide();">
+    <div id="bodyBg" class="bodyBg"></div>
+    <aside id="shareBox" class="shareBox">
+        <a id="shareFB"  rel="nofollow" target="_blank" title="Add to Facebook" href="http://facebook.com/" style="background-image: url(./style/facebook_32.png);" ></a>
+        <a id="shareTwitter" rel="nofollow" target="_blank" title="Twitter" href="https://twitter.com/" style="background-image: url(./style/twitter_32.png);" ></a>
+        <a id="shareBlogger" rel="nofollow" target="_blank" title="In Blogger" href="http://blogger.com" style="background-image: url(./style/blogger_32.png);"></a>
+        <a id="shareEmail" rel="nofollow" target="_blank" title="By E-mail" href="mailto:" style="background-image: url(./style/email_32.png);" ></a>
+        <a id="shareLinked" rel="nofollow" target="_blank" title="To LinkedIn" href="http://linkedIn.com" style="background-image: url(./style/linkedin_32.png);" ></a>
+        <a id="shareTumblr" rel="nofollow" target="_blank" title="To Tumblr" href="http://tumblr.com"  style="background-image: url(./style/tumblr_32.png);"></a>
+        <a id="shareGoogle" rel="nofollow" target="_blank" title="To VK" href="https://plus.google.com/"  style="background-image: url(./style/google_32.png);"></a>
+        <a id="shareVk" rel="nofollow" target="_blank" title="To Google Plus" href="http://vk.com/" style="background-image: url(./style/vk_32.png);" ></a>
+    </aside>
+
+    <aside id="zoomBox" class="zoomBox">
+          <div  id="zoomIn" class="zoomIn" title="Zoom In"></div>
+          <div  id="zoomOut" class="zoomOut" title="Zoom Out"></div>
+        </aside>
+
+    <nav id="toolbar" class="toolbarBox" >
+          <div id="tocBtn" class="btn tocBtn" title="Table of Contents"></div> <!--IsToc-->
+          <div id="downloadBtn" class="btn downloadBtn" title="Download"  onmousedown="download.mouseOn(this,event);">
+              <div id="downloadBox" class="downloadBox" onmousedown="download.lock(event);"></div>
+          </div><!--IsDownload-->
+          <div id="htmlLink" class="infoBox infoFont">
+            Basic HTML Version <span id="infoBtn" class="infoBtn" title="About"></span>
+          </div>
+          <div id="Navigation" class="navigationBox">
+            <div id="navigationBoxLeftTool" class="navigationTool navigationLeft" title=""><a href="page1.html"></a></div>
+            <div class="navigationPager toolbarFont ">
+              <input id="currentPage" class="currentPage" type="text" onKeyDown="pager.flip(event,this);">
+              /
+              <span id="lastPage"> 10
+              </span>
+            </div>
+            <div id="navigationBoxRightTool" class="navigationTool navigationRight" title=""><a href="page1.html"></a></div>
+          </div>
+        </nav>
+
+    <div id="infoBalloon" class="balloon" >
+          <div class="arrow"></div>
+          <a href="javascript:about.action();" class="closeButton" title="Close"></a>
+          <h2>Basic HTML version of Basic HTML test publication v8</h2>
+          <p>It has a certain number of design limitations, but fully represents the content.</p>
+          <p>We recommend viewing the <a href="../../../index.html">Flash version</a> of the publication.</p>
+    </div>
+<aside id="tocBox" class="tocBox">
+      <h2>Table of Contents</h2>
+    </aside>
+    <div id="Publication" class="publication">
+      <div id="Book" class="book"><div id="Page" class="page"></div></div>
+      <div id="Copyright" class="copy">
+            Copyright &copy; <a target="_blank" href="http://flippingbook.com?src=1">FlippingBook Demo</a>
+      </div>
+    </div>
+    <nav id="thumbBox" class="thumbBox">
+          <div id="thumbBtn" class="btn thumbBtn" title="Thumbnails"></div>
+          <div id="thumbLeftTool" class="thumbLeftTool" onclick="thumbnail.scrollLeft();"></div>
+          <div id="thumbRightTool" class="thumbRightTool" onclick="thumbnail.scrollRight();"></div>
+          <div id="thumbLine" class="thumbLine"></div>
+    </nav>
+    </body>
+</html>

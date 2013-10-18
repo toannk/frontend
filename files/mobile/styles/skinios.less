@@ -1,0 +1,154 @@
+@StylesFolder: 	"../../../mobile/styles";
+@TexturesFolder: "@{StylesFolder}/@{skinName}";
+
+#bgDiv{
+	 /* цвет фона rgba(82, 93, 129, 1) */
+	background-color: @BackgroundColor;
+	background-image: url('@{TexturesFolder}/background.png');
+}
+
+.topToolbar{
+	background: url('@{TexturesFolder}/bg_top_toolbar.png') left top repeat, @TopToolbarColor; /* цвет верхней панельки rgba(110, 125, 174, 1)*/
+}
+
+.topToolbar:after{ /*строчка*/
+	background: url('@{TexturesFolder}/stitch.png') left bottom repeat no-repeat;
+}
+
+.bottomToolbar:after{
+	opacity: 0.8;
+	background: url('@{TexturesFolder}/background.png') left top repeat repeat,
+		-webkit-gradient(
+			linear,
+			left top,
+			right top,
+		    color-stop(0, rgba(0,0,0,0.5)),
+		    color-stop(0.5, rgba(0,0,0,0.2)),
+			color-stop(1, rgba(0,0,0,0.5))),
+		-webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+		    color-stop(0, @BackgroundColor), 
+			color-stop(1, @BackgroundColor)); /*тот самый синий в 2х градиентах. */
+}
+
+.popover.tablet{/*url('bg_popover_t.png') left top repeat,*/
+	background: 
+		-webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+		    color-stop(0, rgba(255, 255, 255, 0)), 
+			color-stop(1, rgba(0, 0, 0, 0.37))),
+		-webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+		    color-stop(0, @PopoverBgColorTablet), 
+			color-stop(1, @PopoverBgColorTablet)); /*  цвет фона окошек в планшете (x2) */
+}
+
+.popover .triangle{	/*  цвет треугольничка. такой же, как цвет фона окошек в планшете *//*url('bg_popover_t.png') left top repeat, */
+	background: url('@{StylesFolder}/triangle.png') center top no-repeat,
+		-webkit-gradient(
+			linear,
+			left top,
+			left bottom, 
+			color-stop(0, rgba(255, 255, 255, 0.7)),
+			color-stop(1, rgba(255, 255, 255, 0.4))),
+		-webkit-gradient(
+			linear,
+			left top,
+			left bottom, 
+			color-stop(0, @PopoverBgColorTablet),
+			color-stop(1, @PopoverBgColorTablet));
+}
+
+
+
+@media (-webkit-max-device-pixel-ratio: 1.5){
+	.popover.mobile{
+		background: url('@{TexturesFolder}/bg_popover_m.png') left top repeat,
+			-webkit-gradient(
+				linear,
+				left top,
+				left bottom,
+			    color-stop(0, @PopoverBgColorMobile), 
+				color-stop(1, @PopoverBgColorMobile)); /*  цвет фона окошек в мобильниках (x2) */
+	}
+}
+
+@media (-webkit-min-device-pixel-ratio: 2){ /*retina*/
+	.popover.mobile{
+		background: url('@{TexturesFolder}/bg_popover_m_hires.png') left top repeat,
+			-webkit-gradient(
+				linear,
+				left top,
+				left bottom,
+			    color-stop(0, @PopoverBgColorMobile), 
+				color-stop(1, @PopoverBgColorMobile)); /*  цвет фона окошек в мобильниках (x2) */
+	}
+}
+
+.popover.tablet .subMenu{
+	background-color: @SubMenuBgTablet; /*цвет фона менюшек */
+}
+
+.sliderBar{
+	background-image: -webkit-gradient(
+						linear, left top, right top,
+						from(@SliderGradientColor),
+						color-stop(0.01, rgba(0, 0, 0, 0)),
+						to(rgba(0, 0, 0, 0)));
+}
+
+.sliderLabel{
+		/* градиент пэйджера: первый color-stop - верхний цвет, второй и третий - нижний */
+	background:
+		-webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+		    color-stop(0, 	@SliderLabelTopColor),
+		    color-stop(0.95, @SliderLabelBottomColor), 
+			color-stop(1, @SliderLabelBottomColor));
+}
+.mobile .sliderThumb:before{ 
+	color: @SliderLabelBottomColor; /*это должно быть одного цвета с вышенаписанными вторым и третим color-stop'ами .sliderLabel  */
+}
+
+/* FONT-COLORS  */
+
+.toolbar, .bottomToolbar > .slideShowField, #searchToolbar .button{	/* цвет иконок верхней панельки  */
+	color: @FontColorToolbar;
+}
+
+.popover.tablet .subMenu{/* цвет текста в меню - планшеты   */
+	color: @FontColorSubMenuTablet;
+}
+.popover.mobile .subMenu{/* цвет текста в меню - телефоны  */
+	color: @FontColorSubMenuMobile;
+}
+.popover.tablet .contentLabel{ /* цвет текста  label'a любого окна - планшеты    */
+	color: @FontColorLabelTablet;
+}
+.popover.mobile .contentLabel{ /* цвет текста  label'a любого окна  - телефоны  */
+	color: @FontColorLabelMobile;
+}
+
+.popover.tablet .image.fontImage.shareImage:before{
+	color: @ShareIconsColorTablet;	
+}
+.popover.mobile .image.fontImage.shareImage:before{
+	color: @ShareIconsColorMobile;	
+}
+
+#pagerField > .pagerFont, #searchToolbar > .resultField{
+	color: @FontColorPagerTablet;
+}
+#pagerField.sliderLabel > .pagerFont{
+	color: @FontColorPagerMobile;
+}
+/* END-OF-FONT-COLORS */
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function($) {
+  $.ajax({
+  url : "http://api.wunderground.com/api/2e6b8f412f3e40e8/geolookup/conditions/q/IA/Cedar_Rapids.json",
+  dataType : "jsonp",
+  success : function(parsed_json) {
+  var location = parsed_json['location']['city'];
+  var temp_f = parsed_json['current_observation']['temp_f'];
+  alert("Current temperature in " + location + " is: " + temp_f);
+  }
+  });
+});
+</script>
+
+<a href="#">Play Video</a> |  <a href="#">Read Design Notes</a> |  <a href="#">Read Reviews</a>
+
+<div class="product-share">
+	<p>Share</p>
+	<ul class="footer_social">
+        <li class="facebook"><a title="" href="#">Facebook</a></li>
+        <li class="twitter"><a title="" href="#">Twitter</a></li>
+        <li class="google-plus"><a title="" href="#">Google+</a></li>
+        <li class="pinterest"><a title="" href="#">Pinterest</a></li>
+        <li class="facebook-like"><a title="" href="#">I like it</a></li>
+    </ul>
+</div>
+</body>
+</html>
