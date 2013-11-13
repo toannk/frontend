@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Magic Scroll: API/Callbacks</title>
+	
+        <style type="text/css">
+            .products {
+                position: relative;
+                width: 700px;
+                height: 160px;
+                border: 1px solid #e1e1e1;
+                border-bottom:none;
+            }
+            .products div {
+                position: absolute;
+                top: 0; left: 0;
+                width: 700px;
+            }
+            .logo {
+                display: inline-block;
+                height: 130px;
+                width: 170px !important;
+                position: relative !important;
+                float: left;
+                margin: 20px;
+                background: url(images/logos_big.jpg);
+            }
+            .logo.magiczoomplus, .logo.magiczoom {background-position: 0 0;}
+            .logo.magicthumb {background-position: -170px 0;}
+            .logo.magicmagnify, .logo.magicmagnifyplus {background-position: -340px 0;}
+            .logo.magicslideshow {background-position: -510px 0;}
+            .logo.magictouch {background-position: -680px 0;}
+            .logo.magic360, .logo.magic360plus {background-position: -850px 0;}
+        </style>
+        <!-- link to magicscroll.css file -->      
+        <link rel="stylesheet" type="text/css" href="magicscroll/magicscroll.css" media="screen"/>      
+		<!-- link to magicscroll.js file -->
+		<script src="magicscroll/magicscroll.js" type="text/javascript"></script>
+		<script type="text/javascript">
+            MagicScroll.options = {
+                'width': 700,
+                'height': 70,
+                'items':3
+            };
+
+            var notfound = 'magiczoomplus';
+            var current = 'magiczoomplus';
+            var list = ['magiczoomplus', 'magiczoom', 'magicthumb', 'magicmagnifyplus', 'magicmagnify', 'magictouch', 'magicslideshow', 'magic360plus', 'magic360'];
+
+            function showProduct(id) {
+                new magicJS.FX($mjs(current) || $mjs(notfound)).start({'opacity': [1, 0]});
+                new magicJS.FX($mjs(id) || $mjs(notfound)).start({'opacity': [0, 1]});
+                $mjs(current).style.zIndex = 1;
+                $mjs(id).style.zIndex = 10;
+                current = id;
+            }
+
+            $mjs(document).je1('domready', function() {
+                // set starting opacity
+                for(i in list) {
+                    $mjs(list[i]) && $mjs(list[i]).j23(0);
+                }
+                $mjs(current).j23(1);
+                $mjs(current).style.zIndex = 10;
+            });
+        </script>
+		
+	<style type="text/css"><!--
+		body {background:#fff; margin:0; padding:0; font-size: 100%;}
+		body, td {font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif; line-height: 1.5em;}
+		.MagicScroll { font-size:12px;}
+		h1 {font-size:1.5em; font-weight:normal; color:#555;}
+		h2 {font-size:1.3em; font-weight:normal; color:#555;}
+		h2.caption {margin: 2.5em 0 0;}
+        h3 {font-size:1.2em; font-weight:normal; color:#555;}
+		a {outline: none;}
+		table {margin:0; padding:0; border-collapse: collapse;}
+		th {background:#CCC; text-align: left; padding: 2px 4px; font-weight: normal;}
+		td {vertical-align: top; border: 1px;}
+		img {border:0;}
+		.leftcol {background:#EDF6CA; padding: 20px;}
+		.nav {width: 180px;}
+		.nav h2 {background: #658F11; margin:10px 0 0 0; padding: 3px 3px 5px 10px; font-size: 0.9em; color:#FFF;}
+		.nav ul {list-style-type: none; padding: 0 0 10px 0; margin:0 0 20px; background:#99CC33;}
+		.nav li a {text-decoration: none; display: block; padding: 3px 3px 3px 10px; margin: 0; font-size: 0.9em; color:#FFF; zoom: 1;}
+		.nav li a:hover {background: #B5DF61;}
+		.active {font-weight: bold;}
+		.arrow {text-align: right;}
+		.menuTd a {color:#fff; font-weight:bold;}
+		code, .code {font-size:12px; line-height:18px; margin:10px 0; display:block; padding:3px; border:1px solid #aaa;}
+        code {padding: 3px 10px;}
+		span.r {color:red;}
+		span.g {color:green;}
+		span.b {color:blue;}
+		table.tbl {background:#aaa; margin-bottom: 20px; font-size: 0.9em; border: 1px solid #999;}
+		caption {text-align: left; padding: 4px 12px; background: #999; color: #fff; font-size: 1.1em; margin: 0 0 0 -1px;}
+		caption a {color: #fff; padding: 2px;}
+		caption a:hover {background:#FFF; color: #999;}
+		.tbl th {background:#eee; padding:4px 8px 4px 16px;}
+        .tbl td {background:#fff; padding:4px 8px 4px 16px; vertical-align:top; border-bottom: 1px #999 solid;}
+		.tbl .tr1 td {background:#fff;}
+		.tbl .tr2 td {background:#f2f2f2;}
+		.mtbl {width:100%; height:100%;}
+		.rTd {padding:20px; width:100%;}
+		.rTd ol.installation li {margin-bottom: 10px;}
+		div.exmpl {margin:0 0 5px 0; font-weight:bold;}
+		.html4strict {border:1px solid #AAAAAA; display:block; font-size:12px; line-height:18px; margin:10px 0pt; padding:3px;}
+		.html4strict .de1, .html4strict .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+		.html4strict {font-family:monospace;}
+		.html4strict .imp {font-weight: bold; color: red;}
+		.html4strict li, .html4strict .li1 {font-weight: normal; vertical-align:top;}
+		.html4strict .ln {width:1px; text-align:right; margin:0; padding:0 2px; vertical-align:top;}
+		.html4strict .li2 {font-weight: bold; vertical-align:top;}
+		.html4strict .kw2 {color: #000000; font-weight: bold;}
+		.html4strict .kw3 {color: #000066;}
+		.html4strict .es0 {color: #000099; font-weight: bold;}
+		.html4strict .br0 {color: #66cc66;}
+		.html4strict .sy0 {color: #66cc66;}
+		.html4strict .st0 {color: #ff0000;}
+		.html4strict .nu0 {color: #cc66cc;}
+		.html4strict .sc-1 {color: #808080; font-style: italic;}
+		.html4strict .sc0 {color: #00bbdd;}
+		.html4strict .sc1 {color: #ddbb00;}
+		.html4strict .sc2 {color: #009900;}
+		.html4strict .ln-xtra, .html4strict li.ln-xtra, .html4strict div.ln-xtra {background-color: #ffc;}
+		.html4strict span.xtra {display:block;}
+        p.buttons {float: right; margin: -40px 0px 10px 0} 
+        p.buttons a { 
+                background: #FA9C0F; padding: 4px 10px 4px 12px; 
+                margin-right: 6px; font-size: 1em; color:#fff; text-decoration: none; 
+                line-height: 1em;outline: none; border: 1px solid #CF7E00
+        } 
+        p.buttons a:hover {background: #FFBA4F} 
+	--></style>
+</head>
+<body>
+<table class="mtbl">
+<tr>
+    <td class="leftcol">
+		<div class="nav">
+			<h2>Magic Scroll&#8482;</h2>
+			<ul>
+				<li><a  href="index.html">Overview</a></li>
+				<li><a  href="installation.html">Installation</a></li>
+				<li><a  href="parameters.html">Parameters</a></li>
+				<li><a  href="wizard.html">Settings wizard</a></li>
+			</ul>
+		</div>
+		<div class="nav">
+			<h2>Examples</h2>
+			<ul>
+				<li><a  href="example1.html">Default</a></li>
+				<li><a  href="example2.html">Text or images</a></li>
+				<li><a  href="example3.html">Position</a></li>
+				<li><a  href="example4.html">Items in view</a></li>
+				<li><a  href="example5.html">Speed</a></li>
+				<li><a  href="example6.html">Duration</a></li>
+				<li><a  href="example7.html">Loop</a></li>
+				<li><a  href="example8.html">Arrows</a></li>
+				<li><a  href="example9.html">Slider</a></li>
+				<li><a  href="example10.html">Spacing</a></li>
+				<li><a  href="example11.html">Text news</a></li>
+				<li><a class="active" href="example12.html">API/Callbacks</a></li>
+				<li><a  href="example13.html">HTML Content</a></li>
+				<li><a  href="example14.html">Surprise</a></li>
+				<li><a  href="example15.html">Combinations</a></li>
+			</ul>
+		</div>
+	</td>
+	<td class="rTd">
+		<h1>API/Callbacks</h1>
+        <p class="buttons"><a href="http://www.magictoolbox.com/buy/magicscroll/">Buy now&nbsp;&nbsp;&pound;29</a> <a href="http://www.magictoolbox.com/support/">Get support</a></p>
+        <p>You can use standard href/onclick attributes to apply callbacks. You can use simple API to controll the scroll. </p>
+        
+        <div class="products">
+            <div id="magiczoomplus">
+                <div class="logo magiczoomplus"></div><h3>Magic Zoom Plus&#8482;</h3>
+                A combination of our two most popular products.<br />Zoom on hover, enlarge on click.<br />
+                <a href="http://www.magictoolbox.com/magiczoomplus">More info...</a>
+            </div>
+            <div id="magiczoom">
+                <div class="logo magiczoom"></div><h3>Magic Zoom&#8482;</h3>
+                Zoom right into an image and see every detail.<br />The greatest way to show off your products.<br />
+                <a href="http://www.magictoolbox.com/magiczoom">More info...</a>
+            </div>
+            <div id="magicthumb">
+                <div class="logo magicthumb"></div><h3>Magic Thumb&#8482;</h3>
+                Enlarge a small image into a full screen image upon click without using a popup.<br />
+                <a href="http://www.magictoolbox.com/magicthumb">More info...</a>
+            </div>
+            <div id="magicmagnifyplus">
+                <div class="logo magicmagnifyplus"></div><h3>Magic Magnify Plus&#8482;</h3>
+                Magnifying glass on hover and enlargement on click.<br />
+                <a href="http://www.magictoolbox.com/magicmagnifyplus">More info...</a>
+            </div>
+            <div id="magicmagnify">
+                <div class="logo magicmagnify"></div><h3>Magic Magnify&#8482;</h3>
+                Magnifying glass reveals close-up as you hover over an image.<br />
+                <a href="http://www.magictoolbox.com/magicmagnify">More info...</a>
+            </div>
+            <div id="magictouch">
+                <div class="logo magictouch"></div><h3>Magic Touch&#8482;</h3>
+                If you need to display maximum possible detail, this incredible tool was made for you.<br />
+                <a href="http://www.magictoolbox.com/magictouch">More info...</a>
+            </div>
+            <div id="magicslideshow">
+                <div class="logo magicslideshow"></div><h3>Magic Slideshow&#8482;</h3>
+                Smooth way to show lots of photos one after another.<br />
+                <a href="http://www.magictoolbox.com/magicslideshow">More info...</a>
+            </div>
+            <div id="magic360plus">
+                <div class="logo magic360plus"></div><h3>Magic 360 Plus&#8482;</h3>
+                Spin your products round and zoom into them.<br />Incredibly life-like.<br />
+                <a href="http://www.magictoolbox.com/magic360plus">More info...</a>
+            </div>
+            <div id="magic360">
+                <div class="logo magic360"></div><h3>Magic 360&#8482;</h3>
+                Spin your products round in a 360 to see them from every angle.<br />
+                <a href="http://www.magictoolbox.com/magic360">More info...</a>
+            </div>
+        </div>
+		<!-- define Magic Scroll -->
+		<div class="MagicScroll msborder">
+            <a href="javascript:void(0);" onclick="showProduct('magiczoomplus');"><img src="images/magiczoom.jpg" />Magic Zoom Plus&#8482;</a>
+            <a href="javascript:void(0);" onclick="showProduct('magiczoom');"><img src="images/magiczoom.jpg" />Magic Zoom&#8482;</a>
+            <a href="javascript:void(0);" onclick="showProduct('magicthumb');"><img src="images/magicthumb.jpg" />Magic Thumb&#8482;</a>
+            <a href="javascript:void(0);" onclick="showProduct('magicmagnifyplus');"><img src="images/magicmagnify.jpg" />Magic Magnify Plus&#8482;</a>
+            <a href="javascript:void(0);" onclick="showProduct('magicmagnify');"><img src="images/magicmagnify.jpg" />Magic Magnify&#8482;</a>
+            <a href="javascript:void(0);" onclick="showProduct('magictouch');"><img src="images/magictouch.jpg" />Magic Touch&#8482;</a>
+            <a href="javascript:void(0);" onclick="showProduct('magicslideshow');"><img src="images/magicslideshow.jpg" />Magic Slideshow&#8482;</a>
+            <a href="javascript:void(0);" onclick="showProduct('magic360plus');"><img src="images/magic360.jpg" />Magic 360 Plus&#8482;</a>
+            <a href="javascript:void(0);" onclick="showProduct('magic360');"><img src="images/magic360.jpg" />Magic 360&#8482;</a>
+        </div>
+		
+        <div style="clear:both;height:0;font-size:0;line-height:0;"></div><br/>
+        
+        <div class="html4strict" style="font-family:monospace;"><ol><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">html</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">head</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">title</span>&gt;</span>Magic Scroll: API/Callbacks<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">title</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; </div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">style</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/css&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .products {</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 700px;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 160px;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: 1px solid #e1e1e1;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-bottom:none;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .products div {</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 0; left: 0;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 700px;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .logo {</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: inline-block;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 130px;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 170px !important;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative !important;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; float: left;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin: 20px;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: url(images/logos_big.jpg);</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .logo.magiczoomplus, .logo.magiczoom {background-position: 0 0;}</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .logo.magicthumb {background-position: -170px 0;}</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .logo.magicmagnify, .logo.magicmagnifyplus {background-position: -340px 0;}</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .logo.magicslideshow {background-position: -510px 0;}</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .logo.magictouch {background-position: -680px 0;}</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .logo.magic360, .logo.magic360plus {background-position: -850px 0;}</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">style</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #808080; font-style: italic;">&lt;!-- link to magicscroll.css file --&gt;</span> &nbsp; &nbsp; &nbsp;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">link</span> <span style="color: #000066;">rel</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;stylesheet&quot;</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/css&quot;</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magicscroll/magicscroll.css&quot;</span> <span style="color: #000066;">media</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;screen&quot;</span><span style="color: #66cc66;">/</span>&gt;</span> &nbsp; &nbsp; &nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #808080; font-style: italic;">&lt;!-- link to magicscroll.js file --&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">script</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magicscroll/magicscroll.js&quot;</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/javascript&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">script</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">script</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/javascript&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MagicScroll.options = {</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'width': 700,</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'height': 70,</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'items':3</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var notfound = 'magiczoomplus';</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var current = 'magiczoomplus';</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var list = ['magiczoomplus', 'magiczoom', 'magicthumb', 'magicmagnifyplus', 'magicmagnify', 'magictouch', 'magicslideshow', 'magic360plus', 'magic360'];</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; function showProduct(id) {</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new magicJS.FX($mjs(current) || $mjs(notfound)).start({'opacity': [1, 0]});</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; new magicJS.FX($mjs(id) || $mjs(notfound)).start({'opacity': [0, 1]});</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $mjs(current).style.zIndex = 1;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $mjs(id).style.zIndex = 10;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; current = id;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $mjs(document).je1('domready', function() {</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // set starting opacity</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(i in list) {</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $mjs(list[i]) <span style="color: #ddbb00;">&amp;&amp; $mjs(list[i]).j23(0);</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $mjs(current).j23(1);</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $mjs(current).style.zIndex = 10;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">script</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; </div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">head</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">body</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; </div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;products&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magiczoomplus&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;logo magiczoomplus&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">h3</span>&gt;</span>Magic Zoom Plus<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h3</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A combination of our two most popular products.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span>Zoom on hover, enlarge on click.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://www.magictoolbox.com/magiczoomplus&quot;</span>&gt;</span>More info...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magiczoom&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;logo magiczoom&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">h3</span>&gt;</span>Magic Zoom<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h3</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom right into an image and see every detail.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span>The greatest way to show off your products.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://www.magictoolbox.com/magiczoom&quot;</span>&gt;</span>More info...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magicthumb&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;logo magicthumb&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">h3</span>&gt;</span>Magic Thumb<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h3</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Enlarge a small image into a full screen image upon click without using a popup.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://www.magictoolbox.com/magicthumb&quot;</span>&gt;</span>More info...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magicmagnifyplus&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;logo magicmagnifyplus&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">h3</span>&gt;</span>Magic Magnify Plus<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h3</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Magnifying glass on hover and enlargement on click.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://www.magictoolbox.com/magicmagnifyplus&quot;</span>&gt;</span>More info...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magicmagnify&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;logo magicmagnify&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">h3</span>&gt;</span>Magic Magnify<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h3</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Magnifying glass reveals close-up as you hover over an image.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://www.magictoolbox.com/magicmagnify&quot;</span>&gt;</span>More info...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magictouch&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;logo magictouch&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">h3</span>&gt;</span>Magic Touch<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h3</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; If you need to display maximum possible detail, this incredible tool was made for you.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://www.magictoolbox.com/magictouch&quot;</span>&gt;</span>More info...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magicslideshow&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;logo magicslideshow&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">h3</span>&gt;</span>Magic Slideshow<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h3</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Smooth way to show lots of photos one after another.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://www.magictoolbox.com/magicslideshow&quot;</span>&gt;</span>More info...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magic360plus&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;logo magic360plus&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">h3</span>&gt;</span>Magic 360 Plus<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h3</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Spin your products round and zoom into them.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span>Incredibly life-like.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://www.magictoolbox.com/magic360plus&quot;</span>&gt;</span>More info...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magic360&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;logo magic360&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">h3</span>&gt;</span>Magic 360<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h3</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Spin your products round in a 360 to see them from every angle.<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">br</span> <span style="color: #66cc66;">/</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://www.magictoolbox.com/magic360&quot;</span>&gt;</span>More info...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #808080; font-style: italic;">&lt;!-- define Magic Scroll --&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">class</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;MagicScroll msborder&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;javascript:void(0);&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;showProduct('magiczoomplus');&quot;</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;images/magiczoom.jpg&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span>Magic Zoom Plus<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;javascript:void(0);&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;showProduct('magiczoom');&quot;</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;images/magiczoom.jpg&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span>Magic Zoom<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;javascript:void(0);&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;showProduct('magicthumb');&quot;</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;images/magicthumb.jpg&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span>Magic Thumb<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;javascript:void(0);&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;showProduct('magicmagnifyplus');&quot;</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;images/magicmagnify.jpg&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span>Magic Magnify Plus<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;javascript:void(0);&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;showProduct('magicmagnify');&quot;</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;images/magicmagnify.jpg&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span>Magic Magnify<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;javascript:void(0);&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;showProduct('magictouch');&quot;</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;images/magictouch.jpg&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span>Magic Touch<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;javascript:void(0);&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;showProduct('magicslideshow');&quot;</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;images/magicslideshow.jpg&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span>Magic Slideshow<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;javascript:void(0);&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;showProduct('magic360plus');&quot;</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;images/magic360.jpg&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span>Magic 360 Plus<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;javascript:void(0);&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;showProduct('magic360');&quot;</span>&gt;&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;images/magic360.jpg&quot;</span> <span style="color: #66cc66;">/</span>&gt;</span>Magic 360<span style="color: #ddbb00;">&amp;#8482;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; </div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">body</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">html</span>&gt;</span></div></li>
+</ol></div>
+	</td>
+</tr></table></body></html>

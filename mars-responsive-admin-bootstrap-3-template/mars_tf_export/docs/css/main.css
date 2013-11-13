@@ -1,0 +1,202 @@
+@import url(custom_reset.css);
+@import url(font-awesome/font-awesome.css);
+pre {
+  font-size: 12px;
+  line-height: 14px;
+  color: #999999;
+  background-color: #efefef;
+  padding: 20px;
+  border-radius: 3px;
+  border: 1px solid #dedede; }
+
+ul li {
+  margin-bottom: 10px; }
+
+body {
+  background-color: white;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 24px;
+  color: #333332; }
+
+a {
+  color: #4c7f96;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: none;
+    border-bottom: 1px solid #57B6F2;
+    background-color: #E8F6FF; }
+
+ol li {
+  margin-bottom: 10px; }
+ol ul {
+  margin-top: 20px; }
+  ol ul li {
+    margin-bottom: 5px; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #333332;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400; }
+
+h1 {
+  font-size: 32.4px;
+  line-height: 43.2px;
+  border-bottom: 1px solid #e6e6e6; }
+
+h2 {
+  font-size: 25.2px;
+  line-height: 33.6px;
+  border-bottom: 1px solid #e6e6e6;
+  margin-top: 80px; }
+
+h3 {
+  font-size: 21.6px;
+  line-height: 28.8px;
+  border-bottom: 1px solid #e6e6e6; }
+  h3 i {
+    font-size: 18px;
+    margin-right: 5px; }
+
+strong {
+  font-weight: 700; }
+
+img {
+  /* Responsive images (ensure images don't scale beyond their parents) */
+  max-width: 100%;
+  /* Part 1: Set a maxium relative to the parent */
+  width: auto\9;
+  /* IE7-8 need help adjusting responsive images */
+  height: auto;
+  /* Part 2: Scale the height according to the width, otherwise you get stretching */
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic; }
+
+img.screenshot {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 40%;
+  display: block;
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  cursor: pointer; }
+  img.screenshot.bigger {
+    width: 60%; }
+  img.screenshot.full {
+    width: 100%; }
+
+.container {
+  max-width: 1300px;
+  min-width: 950px;
+  margin: 0px auto;
+  *zoom: 1; }
+  .container:before, .container:after {
+    content: " ";
+    display: table; }
+  .container:after {
+    clear: both; }
+  .container .container-i {
+    float: right;
+    width: 70%;
+    border-right: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    padding: 0 3em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  .container .side-menu-w {
+    width: 30%;
+    padding-left: 20px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+.table-of-contents-header {
+  line-height: 43.2px;
+  margin-top: 20px; }
+  .table-of-contents-header i {
+    font-size: 20px; }
+
+.table-of-contents {
+  font-size: 14.4px; }
+
+.list-of-files {
+  padding-left: 70px; }
+  .list-of-files li {
+    list-style: none;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 30px; }
+    .list-of-files li span {
+      display: block;
+      font-size: 12px;
+      line-height: 12px;
+      color: #888;
+      font-weight: 100; }
+    .list-of-files li:before {
+      font-family: FontAwesome;
+      position: absolute;
+      left: 0px;
+      top: 10px;
+      font-size: 18px;
+      line-height: 24px; }
+    .list-of-files li:last-child {
+      border-bottom: 0px; }
+    .list-of-files li.folder-opened:before {
+      color: #3786B7;
+      content: "\f115"; }
+    .list-of-files li.folder-closed:before {
+      color: #3786B7;
+      content: "\f114"; }
+    .list-of-files li.file:before {
+      color: #3786B7;
+      content: "\f0f6"; }
+    .list-of-files li.archive:before {
+      color: #3786B7;
+      content: "\f0a0"; }
+  .list-of-files ul {
+    margin-left: 0px;
+    padding-left: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee; }
+    .list-of-files ul:before {
+      font-family: FontAwesome;
+      position: absolute;
+      left: -26px;
+      top: 10px;
+      font-size: 18px;
+      line-height: 24px;
+      color: #3786B7;
+      content: "\f0d7"; }
+
+.archive-w {
+  padding: 10px;
+  padding-left: 40px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+  position: relative; }
+  .archive-w .archive:before {
+    font-family: FontAwesome;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    color: #3786B7;
+    content: "\f0a0"; }
+
+.note {
+  font-size: 14.4px;
+  line-height: 19.2px;
+  color: #777;
+  font-weight: 100;
+  background-color: #f9f8f1;
+  padding: 5px;
+  margin-top: 5px; }

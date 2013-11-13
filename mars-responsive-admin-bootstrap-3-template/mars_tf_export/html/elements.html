@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+        <!-- Hammer reload -->
+          <script>
+            setInterval(function(){
+              try {
+                if(typeof ws != 'undefined' && ws.readyState == 1){return true;}
+                ws = new WebSocket('ws://'+(location.host || 'localhost').split(':')[0]+':35353')
+                ws.onopen = function(){ws.onclose = function(){document.location.reload()}}
+                ws.onmessage = function(){
+                  var links = document.getElementsByTagName('link'); 
+                    for (var i = 0; i < links.length;i++) { 
+                    var link = links[i]; 
+                    if (link.rel === 'stylesheet' && !link.href.match(/typekit/)) { 
+                      href = link.href.replace(/((&|\?)hammer=)[^&]+/,''); 
+                      link.href = href + (href.indexOf('?')>=0?'&':'?') + 'hammer='+(new Date().valueOf());
+                    }
+                  }
+                }
+              }catch(e){}
+            }, 1000)
+          </script>
+        <!-- /Hammer reload -->
+      
+
+  <link rel='stylesheet' href='assets/css/fullcalendar.css'>
+<link rel='stylesheet' href='assets/css/datatables/datatables.css'>
+<link rel='stylesheet' href='assets/css/datatables/bootstrap.datatables.css'>
+<link rel='stylesheet' href='assets/scss/chosen.css'>
+<link rel='stylesheet' href='assets/scss/font-awesome/font-awesome.css'>
+<link rel='stylesheet' href='assets/css/app.css'>
+
+  <link href='http://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+
+  <link href="assets/favicon.ico" rel="shortcut icon">
+  <link href="assets/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    @javascript html5shiv respond.min
+  <![endif]-->
+
+  <title>Responsive Admin template based on Bootstrap 3</title>
+
+</head>
+
+<body>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42863888-3', 'pinsupreme.com');
+    ga('send', 'pageview');
+
+  </script>
+
+<div class="all-wrapper">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="text-center">
+  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+</div>
+<div class="side-bar-wrapper collapse navbar-collapse navbar-ex1-collapse">
+  <a href="#" class="logo hidden-sm hidden-xs">
+    <i class="icon-cloud-download"></i>
+    <span>Mars Admin</span>
+  </a>
+  <div class="search-box">
+    <input type="text" placeholder="SEARCH" class="form-control">
+  </div>
+  <ul class="side-menu">
+    <li>
+      <a href="notifications.html">
+        <span class="badge badge-notifications pull-right alert-animated">5</span>
+        <i class="icon-flag"></i> Notifications
+      </a>
+    </li>
+  </ul>
+  <div class="relative-w">
+    <ul class="side-menu">
+      <li>
+        <a href="index.html">
+          <span class="badge pull-right">17</span>
+          <i class="icon-dashboard"></i> Dashboard
+        </a>
+      </li>
+      <li>
+        <a href="charts.html" class="is-dropdown-menu">
+          <span class="badge pull-right"></span>
+          <i class="icon-bar-chart"></i> Charts
+        </a>
+        <ul>
+          <li>
+            <a href="charts.html#area_chart_anchor">
+              <i class="icon-random"></i>
+              Area Chart
+            </a>
+          </li>
+          <li>
+            <a href="charts.html#circle_chart_anchor">
+              <i class="icon-bullseye"></i>
+              Circular Chart
+            </a>
+          </li>
+          <li>
+            <a href="charts.html#bar_chart_anchor">
+              <i class="icon-signal"></i>
+              Bar Chart
+            </a>
+          </li>
+          <li>
+            <a href="charts.html#line_chart_anchor">
+              <i class="icon-bar-chart"></i>
+              Line Chart
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="forms.html">
+          <span class="badge pull-right">12</span>
+          <i class="icon-terminal"></i> Forms
+        </a>
+      </li>
+      <li class='current'>
+        <a href="elements.html" class="current is-dropdown-menu">
+          <span class="badge pull-right"></span>
+          <i class="icon-code-fork"></i> UI Elements
+        </a>
+        <ul>
+          <li class='current'>
+            <a class='current' href="elements.html">
+              <i class="icon-beaker"></i>
+              Elements
+            </a>
+          </li>
+          <li>
+            <a href="icons.html">
+              <i class="icon-picture"></i>
+              Icons
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="datatable.html" class="is-dropdown-menu">
+          <span class="badge pull-right">24</span>
+          <i class="icon-th"></i> Tables
+        </a>
+        <ul>
+          <li>
+            <a href="datatable.html">
+              <i class="icon-list-alt"></i>
+              Data Tables
+            </a>
+          </li>
+          <li>
+            <a href="table.html">
+              <i class="icon-table"></i>
+              Regular Tables
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="calendar.html">
+          <span class="badge pull-right">11</span>
+          <i class="icon-calendar"></i> Calendar
+        </a>
+      </li>
+      <li>
+        <a href="login.html">
+          <span class="badge pull-right"></span>
+          <i class="icon-signin"></i> Login Page
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+    </div>
+    <div class="col-md-9">
+
+      <div class="content-wrapper wood-wrapper">
+        <div class="content-inner">
+          <div class="page-header">
+  <div class="header-links hidden-xs">
+    <a href="notifications.html"><i class="icon-comments"></i> User Alerts</a>
+    <a href="#"><i class="icon-cog"></i> Settings</a>
+    <a href="#"><i class="icon-signout"></i> Logout</a>
+  </div>
+  <h1><i class="icon-bar-chart"></i> Dashboard</h1>
+</div>
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Bread</a></li>
+  <li><a href="#">Crumbs</a></li>
+  <li class="active">Example</li>
+</ol>
+          <div class="main-content">
+            <div class="widget">
+              <div class="widget-controls pull-right">
+                <a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a>
+                <a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a>
+              </div>
+              <h3 class="section-title first-title more-margin"><i class="icon-tasks"></i> Buttons</h3>
+              <h4 class="section-sub-title">Regular Buttons</h4>
+              <!-- Standard gray button with gradient -->
+              <button type="button" class="btn btn-default">Default</button>
+
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <button type="button" class="btn btn-primary">Primary</button>
+
+              <!-- Indicates a successful or positive action -->
+              <button type="button" class="btn btn-success">Success</button>
+
+              <!-- Contextual button for informational alert messages -->
+              <button type="button" class="btn btn-info">Info</button>
+
+              <!-- Indicates caution should be taken with this action -->
+              <button type="button" class="btn btn-warning">Warning</button>
+
+              <!-- Indicates a dangerous or potentially negative action -->
+              <button type="button" class="btn btn-danger">Danger</button>
+              <h4 class="section-sub-title">Rounded Buttons</h4>
+              <!-- Standard gray button with gradient -->
+              <button type="button" class="btn btn-default btn-round">Default</button>
+
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <button type="button" class="btn btn-primary btn-round">Primary</button>
+
+              <!-- Indicates a successful or positive action -->
+              <button type="button" class="btn btn-success btn-round">Success</button>
+
+              <!-- Contextual button for informational alert messages -->
+              <button type="button" class="btn btn-info btn-round">Info</button>
+
+              <!-- Indicates caution should be taken with this action -->
+              <button type="button" class="btn btn-warning btn-round">Warning</button>
+
+              <!-- Indicates a dangerous or potentially negative action -->
+              <button type="button" class="btn btn-danger btn-round">Danger</button>
+              <h4 class="section-sub-title">Different Sizes</h4>
+              <p>
+                <button type="button" class="btn btn-primary btn-lg">Large button</button>
+                <button type="button" class="btn btn-default btn-lg btn-round">Large button</button>
+              </p>
+              <p>
+                <button type="button" class="btn btn-primary">Default button</button>
+                <button type="button" class="btn btn-default btn-round">Default button</button>
+              </p>
+              <p>
+                <button type="button" class="btn btn-primary btn-sm">Small button</button>
+                <button type="button" class="btn btn-default btn-sm btn-round">Small button</button>
+              </p>
+              <p>
+                <button type="button" class="btn btn-primary btn-xs">Extra small button</button>
+                <button type="button" class="btn btn-default btn-xs btn-round">Extra small button</button>
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="widget">
+                  <h4 class="section-sub-title">Regular Dropdowns</h4>
+                  <div class="bs-example">
+                    <div class="dropdown clearfix">
+                      <a id="dropdownMenu2" href="#" role="button" class="sr-only dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                        <li role="presentation" class="dropdown-header">Dropdown header</li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation" class="dropdown-header">Dropdown header</li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="widget">
+                  <h4 class="section-sub-title">Button Groups</h4>
+                  <div class="bs-example">
+                    <div class="btn-toolbar">
+                      <div class="btn-group btn-group-lg">
+                        <button type="button" class="btn btn-default">Left</button>
+                        <button type="button" class="btn btn-default">Middle</button>
+                        <button type="button" class="btn btn-default">Right</button>
+                      </div>
+                    </div>
+                    <div class="btn-toolbar">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default">Left</button>
+                        <button type="button" class="btn btn-default">Middle</button>
+                        <button type="button" class="btn btn-default">Right</button>
+                      </div>
+                    </div>
+                    <div class="btn-toolbar">
+                      <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default">Left</button>
+                        <button type="button" class="btn btn-default">Middle</button>
+                        <button type="button" class="btn btn-default">Right</button>
+                      </div>
+                    </div>
+                    <div class="btn-toolbar">
+                      <div class="btn-group btn-group-xs">
+                        <button type="button" class="btn btn-default">Left</button>
+                        <button type="button" class="btn btn-default">Middle</button>
+                        <button type="button" class="btn btn-default">Right</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="widget">
+                  <h4 class="section-sub-title">Button Dropdowns</h4>
+                  <div class="bs-example">
+                    <div class="btn-toolbar">
+                      <div class="btn-group">
+                        <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
+                          Large button <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /btn-toolbar -->
+                    <div class="btn-toolbar">
+                      <div class="btn-group">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                          Small button <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /btn-toolbar -->
+                    <div class="btn-toolbar">
+                      <div class="btn-group">
+                        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+                          Extra small button <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /btn-toolbar -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="widget">
+                  <h3 class="section-title more-margin"><i class="icon-tasks"></i> Tabs</h3>
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_pie_chart" data-toggle="tab"><i class="icon-bullseye"></i> Pie Chart</a></li>
+                    <li><a href="#tab_table" data-toggle="tab"><i class="icon-table"></i> Table</a></li>
+                  </ul>
+                  <div class="tab-content bottom-margin">
+                    <div class="tab-pane active" id="tab_pie_chart">
+                      <div class="shadowed-bottom">
+                        <div class="row">
+                          <div class="col-md-3 bordered">
+                            <div class="value-block padded-left text-center">
+                              <div class="value-self">520</div>
+                              <div class="value-sub">Total Sales</div>
+                            </div>
+                          </div>
+                          <div class="col-md-3 bordered">
+                            <div class="value-block text-center">
+                              <div class="value-self">1,120</div>
+                              <div class="value-sub">Total Visitors</div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <form class="form-inline form-period-selector">
+                              <label class="control-label">Time Period:</label><br>
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="padded">
+                        <div id="piechart" style=""></div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="tab_table">
+                      <div class="shadowed-bottom">
+                        <div class="row">
+                          <div class="col-md-3 bordered">
+                            <div class="value-block padded-left text-center">
+                              <div class="value-self">520</div>
+                              <div class="value-sub">Total Sales</div>
+                            </div>
+                          </div>
+                          <div class="col-md-3 bordered">
+                            <div class="value-block text-center">
+                              <div class="value-self">1,120</div>
+                              <div class="value-sub">Total Visitors</div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <form class="form-inline form-period-selector">
+                              <label class="control-label">Time Period:</label><br>
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="padded">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Product</th>
+                            <th>Qty</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Floor Lamp</td>
+                            <td>2</td>
+                          </tr>
+                          <tr>
+                            <td>Coffee Mug</td>
+                            <td>4</td>
+                          </tr>
+                          <tr>
+                            <td>Television</td>
+                            <td>1</td>
+                          </tr>
+                          <tr>
+                            <td>Red Carpet</td>
+                            <td>6</td>
+                          </tr>
+                          <tr>
+                            <td>Laptop</td>
+                            <td>3</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="widget">
+                  <h3 class="section-title more-margin"><i class="icon-tasks"></i> Pills</h3>
+
+                  <ul class="nav nav-pills">
+                    <li class="active"><a href="#pillHour" data-toggle="pill">Hour</a></li>
+                    <li><a href="#pillDay" data-toggle="pill">Day</a></li>
+                    <li><a href="#pillMonth" data-toggle="pill">Month</a></li>
+                  </ul>
+                  <div class="tab-content bottom-margin">
+                    <div class="tab-pane active" id="pillHour">
+
+                      <div class="shadowed-bottom">
+                        <div class="row">
+                          <div class="col-md-3 bordered">
+                            <div class="value-block padded-left text-center">
+                              <div class="value-self">520</div>
+                              <div class="value-sub">Total Sales</div>
+                            </div>
+                          </div>
+                          <div class="col-md-3 bordered">
+                            <div class="value-block text-center">
+                              <div class="value-self">1,120</div>
+                              <div class="value-sub">Total Visitors</div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <form class="form-inline form-period-selector">
+                              <label class="control-label">Time Period:</label><br>
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="padded">
+
+                        <div id="topsellers_barchart"></div>
+                        <table class="table" id="topsellers_table">
+                          <thead>
+                            <tr>
+                              <th>Product</th>
+                              <th>Qty</th>
+                              <th>Price</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Floor Lamp</td>
+                              <td>2</td>
+                              <td>3</td>
+                            </tr>
+                            <tr>
+                              <td>Coffee Mug</td>
+                              <td>4</td>
+                              <td>7</td>
+                            </tr>
+                            <tr>
+                              <td>Television</td>
+                              <td>1</td>
+                              <td>3</td>
+                            </tr>
+                            <tr>
+                              <td>Red Carpet</td>
+                              <td>6</td>
+                              <td>5</td>
+                            </tr>
+                            <tr>
+                              <td>Laptop</td>
+                              <td>3</td>
+                              <td>6</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="pillDay">
+                      <div class="shadowed-bottom">
+                        <div class="row">
+                          <div class="col-md-3 bordered">
+                            <div class="value-block padded-left text-center">
+                              <div class="value-self">115</div>
+                              <div class="value-sub">Total Sales</div>
+                            </div>
+                          </div>
+                          <div class="col-md-3 bordered">
+                            <div class="value-block text-center">
+                              <div class="value-self">4,323</div>
+                              <div class="value-sub">Total Visitors</div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <form class="form-inline form-period-selector">
+                              <label class="control-label">Time Period:</label><br>
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="padded">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Product</th>
+                            <th>Qty</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Floor Lamp</td>
+                            <td>2</td>
+                          </tr>
+                          <tr>
+                            <td>Coffee Mug</td>
+                            <td>4</td>
+                          </tr>
+                          <tr>
+                            <td>Television</td>
+                            <td>1</td>
+                          </tr>
+                          <tr>
+                            <td>Red Carpet</td>
+                            <td>6</td>
+                          </tr>
+                          <tr>
+                            <td>Laptop</td>
+                            <td>3</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="pillMonth">
+                      <div class="shadowed-bottom">
+                        <div class="row">
+                          <div class="col-md-3 bordered">
+                            <div class="value-block padded-left text-center">
+                              <div class="value-self">243</div>
+                              <div class="value-sub">Total Sales</div>
+                            </div>
+                          </div>
+                          <div class="col-md-3 bordered">
+                            <div class="value-block text-center">
+                              <div class="value-self">2,734</div>
+                              <div class="value-sub">Total Visitors</div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <form class="form-inline form-period-selector">
+                              <label class="control-label">Time Period:</label><br>
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                              <input type="text" placeholder="01/12/2011" class="form-control input-sm">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="padded">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Product</th>
+                            <th>Qty</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Floor Lamp</td>
+                            <td>2</td>
+                          </tr>
+                          <tr>
+                            <td>Coffee Mug</td>
+                            <td>4</td>
+                          </tr>
+                          <tr>
+                            <td>Television</td>
+                            <td>1</td>
+                          </tr>
+                          <tr>
+                            <td>Red Carpet</td>
+                            <td>6</td>
+                          </tr>
+                          <tr>
+                            <td>Laptop</td>
+                            <td>3</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="widget">
+              <h3 class="section-title first-title more-margin"><i class="icon-warning-sign"></i> Alerts</h3>
+              <ul class="alerts-list">
+                <li>
+                  <div class="alert alert-success alert-dismissable">
+                    <i class="icon-check-sign"></i> <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  </div>
+                <li>
+                </li>
+                  <div class="alert alert-info alert-dismissable">
+                    <i class="icon-lightbulb"></i> <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  </div>
+                <li>
+                </li>
+                  <div class="alert alert-warning alert-dismissable">
+                    <i class="icon-exclamation-sign"></i> <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  </div>
+                </li>
+                <li>
+                  <div class="alert alert-danger alert-dismissable">
+                    <i class="icon-remove-sign"></i> <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="widget">
+              <h3 class="section-title first-title more-margin"><i class="icon-tasks"></i> Progress Bars</h3>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                  <span class="sr-only">40% Complete (success)</span>
+                </div>
+              </div>
+              <div class="progress">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                  <span class="sr-only">20% Complete</span>
+                </div>
+              </div>
+              <div class="progress">
+                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                  <span class="sr-only">60% Complete (warning)</span>
+                </div>
+              </div>
+              <div class="progress">
+                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                  <span class="sr-only">80% Complete</span>
+                </div>
+              </div>
+            </div>
+            <div class="widget">
+              <h3 class="section-title first-title more-margin"><i class="icon-tasks"></i> Slider</h3>
+              <div class="ui-slider-i">
+                <div class="ui-slider"></div>
+              </div>
+              <input type="hidden" id="slider-value">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="color_settings_box hidden-xs">
+  <h3>Color Settings</h3>
+  <label for="wood-wrapper-checkbox" class="checkbox-w">
+    <input type="checkbox" id="wood-wrapper-checkbox">
+    <span class="wood-checkbox"></span> Wrap in Wood
+  </label>
+  <h3>Background</h3>
+  <div class="color-settings-w" data-replace-element="body" data-leave-class="">
+    <div class="color-box color-box-dark-blue color-tooltip" data-toggle="tooltip" data-placement="top" title="Solid Dark Blue" data-replace-with="body-dark-blue"></div>
+    <div class="color-box color-box-light-blue color-tooltip" data-toggle="tooltip" data-placement="top" title="Solid Light Blue" data-replace-with="body-blue"></div>
+    <div class="color-box color-box-grey color-tooltip" data-toggle="tooltip" data-placement="top" title="Solid Grey" data-replace-with="body-grey"></div>
+    <div class="color-box color-box-linen-dark color-tooltip active" data-toggle="tooltip" data-placement="top" title="Dark Linen" data-replace-with="body-dark-linen"></div>
+    <div class="color-box color-box-linen-light color-tooltip" data-toggle="tooltip" data-placement="top" title="Light Linen" data-replace-with="body-light-linen"></div>
+  </div>
+  <h3>Header</h3>
+  <div class="color-settings-w" data-replace-element=".page-header" data-leave-class="page-header">
+    <div class="color-box color-box-dark-blue color-tooltip" data-toggle="tooltip" data-placement="top" title="Dark Blue" data-replace-with="page-header-dark-blue"></div>
+    <div class="color-box color-box-red active color-tooltip" data-toggle="tooltip" data-placement="top" title="Red" data-replace-with="page-header-red"></div>
+    <div class="color-box color-box-green color-tooltip" data-toggle="tooltip" data-placement="top" title="Green" data-replace-with="page-header-green"></div>
+    <div class="color-box color-box-green-sea color-tooltip" data-toggle="tooltip" data-placement="top" title="Green Sea" data-replace-with="page-header-green-sea"></div>
+    <div class="color-box color-box-orange color-tooltip" data-toggle="tooltip" data-placement="top" title="Emerald" data-replace-with="page-header-orange"></div>
+    <div class="color-box color-box-blue color-tooltip" data-toggle="tooltip" data-placement="top" title="Blue" data-replace-with="page-header-blue"></div>
+  </div>
+  <h3>Active Menu</h3>
+  <div class="color-settings-w" data-replace-element=".side-menu" data-leave-class="side-menu">
+    <div class="color-box color-box-dark-blue color-tooltip" data-toggle="tooltip" data-placement="top" title="Dark Blue" data-replace-with="side-menu-dark-blue"></div>
+    <div class="color-box color-box-red active color-tooltip" data-toggle="tooltip" data-placement="top" title="Red (Default)" data-replace-with="side-menu-red"></div>
+    <div class="color-box color-box-green color-tooltip" data-toggle="tooltip" data-placement="top" title="Green" data-replace-with="side-menu-green"></div>
+    <div class="color-box color-box-green-sea color-tooltip" data-toggle="tooltip" data-placement="top" title="Green Sea" data-replace-with="side-menu-green-sea"></div>
+    <div class="color-box color-box-orange color-tooltip" data-toggle="tooltip" data-placement="top" title="Orange" data-replace-with="side-menu-orange"></div>
+    <div class="color-box color-box-blue color-tooltip" data-toggle="tooltip" data-placement="top" title="Blue" data-replace-with="side-menu-blue"></div>
+  </div>
+  <h3>Content</h3>
+  <div class="color-settings-w" data-replace-element=".content-inner" data-leave-class="content-inner">
+    <div class="color-box color-box-white color-tooltip" data-toggle="tooltip" data-placement="top" title="White" data-replace-with="content-inner-white"></div>
+    <div class="color-box color-box-grey color-tooltip" data-toggle="tooltip" data-placement="top" title="Grey" data-replace-with="content-inner-grey"></div>
+    <div class="color-box color-box-beige active color-tooltip" data-toggle="tooltip" data-placement="top" title="Beige" data-replace-with="content-inner-beige"></div>
+  </div>
+  <div class="toggle-color-settings">
+    <i class="icon-cog"></i>
+    <span>hide</span>
+  </div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src='assets/js/jquery.sparkline.min.js'></script>
+<script src='assets/js/bootstrap/tab.js'></script>
+<script src='assets/js/bootstrap/dropdown.js'></script>
+<script src='assets/js/bootstrap/collapse.js'></script>
+<script src='assets/js/bootstrap/transition.js'></script>
+<script src='assets/js/bootstrap/tooltip.js'></script>
+<script src='assets/js/jquery.knob.js'></script>
+<script src='assets/js/fullcalendar.min.js'></script>
+<script src='assets/js/datatables/datatables.min.js'></script>
+<script src='assets/js/chosen.jquery.min.js'></script>
+<script src='assets/js/datatables/bootstrap.datatables.js'></script>
+<script src='assets/js/raphael-min.js'></script>
+<script src='assets/js/morris-0.4.3.min.js'></script>
+<script src='assets/js/for_pages/color_settings.js'></script>
+<script src='assets/js/application.js'></script>
+
+<script src='assets/js/for_pages/elements.js'></script>
+
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Index page</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel='stylesheet' href='css/normalize.css'>
+<link rel='stylesheet' href='css/main.css'>
+        <script src='js/vendor/modernizr-2.6.2.min.js'></script>
+    </head>
+    <body>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-42904928-1', 'usaphp.github.io');
+          ga('send', 'pageview');
+
+        </script>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+<!-- Add your site or application content here -->
+<div class='container'>
+  <div class='side-menu-w'>
+    <h2 class='table-of-contents-header'>
+  <i class='icon-reorder'></i>
+  Table of contents
+</h2>
+<ul class='table-of-contents'>
+  <li>
+    <a href='#docs_intro'>Introduction</a>
+  </li>
+  <li>
+    <a href='#docs_file_structure'>File structure</a>
+  </li>
+  <li>
+    <a href='#docs_html'>HTML Structure</a>
+  </li>
+  <li>
+    <a href='#docs_css'>Icluded CSS</a>
+  </li>
+  <li>
+    <a href='#docs_js'>Icluded JS</a>
+  </li>
+</ul>
+
+  </div>
+  <div class='container-i'>
+    <h1 id='docs_intro'>Template Mars Docs</h1>
+    <p>
+      Thank you for purchasing my theme. If you have any questions that are beyond the scope of this help file, please feel free to use my support service at <a href="http://osetin.ticksy.com" target="_blank">http://osetin.ticksy.com</a>. Thanks so much!
+    </p>
+    <!-- .note -->
+    <!-- Note: You should use a live version of this documentation becase it is always growing and is up to date: <a href="http://usaphp.github.io/venera_docs/Build/index.html">http://usaphp.github.io/venera_docs/Build/index.html</a> -->
+    <h2 id='docs_file_structure'>File structure</h2>
+    <p>
+      Here is a list of files and folder you receive with a purchase of template "Mars":
+    </p>
+    <div class='archive-w'>
+  <div class='archive'>mars_template.zip</div>
+</div>
+<ul class='list-of-files'>
+  <li class='folder-opened'>
+    <strong>html</strong>
+    <span>The main folder which contains files of the template as well as less and scss files</span>
+    <ul>
+      <li class='folder-closed'>
+        assets
+        <span>Contains assets for your template</span>
+      </li>
+      <li class='file'>
+        index.html
+        <span>Source for your homepage</span>
+      </li>
+      <li class='file'>
+        calendar.html
+        <span>Source for your calendar page</span>
+      </li>
+      <li class='file'>
+        charts.html
+        <span>Showcase of available charts</span>
+      </li>
+      <li class='file'>
+        datatable.html
+        <span>Source for datatables tables</span>
+      </li>
+      <li class='file'>
+        elements.html
+        <span>Showcase of elements available to use</span>
+      </li>
+      <li class='file'>
+        login.html
+        <span>Login page example</span>
+      </li>
+      <li class='file'>
+        forms.html
+        <span>Example how to use different forms</span>
+      </li>
+      <li class='file'>
+        notifications.html
+        <span>Example of notifications page</span>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+    <h2 id='docs_html'>HTML Structure</h2>
+    <p>
+      This is the base structure for HTML for this template:
+    </p>
+    <pre>&lt;!DOCTYPE html&gt;&#x000A;&lt;html&gt;&#x000A;&lt;head&gt;&#x000A;  &lt;meta charset=&quot;utf-8&quot;&gt;&#x000A;  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;&#x000A;  &lt;link rel='stylesheet' href='assets/css/app.css'&gt;// MAIN STYLES&#x000A;  &lt;link rel='stylesheet' href='assets/css/animate.min.css'&gt;// CSS ANIMATIONS&#x000A;  &lt;link href='http://fonts.googleapis.com/css?family=Raleway:200,300,400,500,700' rel='stylesheet' type='text/css'&gt;// LOADING GOOGLE FONTS&#x000A;  &lt;link href=&quot;http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css&quot; rel=&quot;stylesheet&quot;&gt;// FONT AWESOME ICONS&#x000A;  &lt;link href=&quot;assets/favicon.ico&quot; rel=&quot;shortcut icon&quot;&gt;&#x000A;  &lt;link href=&quot;assets/apple-touch-icon.png&quot; rel=&quot;apple-touch-icon&quot;&gt;&#x000A;  &lt;title&gt;New Project&lt;/title&gt;&#x000A;&lt;/head&gt;&#x000A;&lt;body&gt;&#x000A;  // PAGE CONTENT&#x000A;  &lt;script src='assets/js/jquery.js'&gt;&lt;/script&gt;&#x000A;  &lt;script src='assets/js/bootstrap/button.js'&gt;&lt;/script&gt;&#x000A;  &lt;script src='assets/js/bootstrap/carousel.js'&gt;&lt;/script&gt;// SLIDER SCRIPTS&#x000A;  &lt;script src='assets/js/bootstrap/transition.js'&gt;&lt;/script&gt;// SMOOTH ANIMATION OF ACCORDION AND SLIDER&#x000A;  &lt;script src='assets/js/bootstrap/collapse.js'&gt;&lt;/script&gt;// ACCORDION SCRIPTS&#x000A;  &lt;script src='assets/js/bootstrap/modal.js'&gt;&lt;/script&gt;// MODALS SUPPORT&#x000A;  &lt;script src='assets/js/bootstrap/dropdown.js'&gt;&lt;/script&gt;// DROPDOWN SUPPORT&#x000A;  &lt;script src='assets/js/jquery.visible.min.js'&gt;&lt;/script&gt;// CHECK IF ELEMENT IS VISIBLE TO APPLY ANIMATION&#x000A;  &lt;script src='assets/js/bootstrap/tab.js'&gt;&lt;/script&gt;// TABS SUPPORT&#x000A;  &lt;script src='assets/js/jquery.isotope.min.js'&gt;&lt;/script&gt;// SORTING OF PORTOFLIO ITEMS&#x000A;  &lt;script src='assets/js/jquery.knob.js'&gt;&lt;/script&gt;// CIRCULAR CHART FOR PERCENTAGE&#x000A;  &lt;script src='assets/js/jquery.scrollUp.min.js'&gt;&lt;/script&gt;// SCROLL TO TOP LINK SCRIPTS&#x000A;  &lt;script src='assets/js/application.js'&gt;&lt;/script&gt;// MAIN SCRIPTS&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;</pre>
+    <h2 id='docs_css'>Included CSS</h2>
+    <p>
+      All of the styles are located in <strong>app.css</strong> file, you can add styles directly into it or you can change styles in the source less file which is located in the <strong>source/less</strong> folder and is called <strong>main.less</strong>.
+    </p>
+    <p>
+      Animations for the elements are defined in the animate.min.css file. We are loading Google Fonts and Font Awesome Icons assets at the top of the HTML.
+    </p>
+    <h2 id='docs_js'>Included JS</h2>
+    <p>
+      The theme imports multiple Javascript files:
+    </p>
+    <ul>
+      <li><strong>jquery.js</strong> - a Javascript library that greatly reduces the amount of code that you must write.</li>
+      <li><strong>bootstrap/carousel.js</strong> - script which is responsible for carousel logic</li>
+      <li><strong>bootstrap/transition.js</strong> - script which is responsible for transition effects if they are not supported by browser</li>
+      <li><strong>bootstrap/collapse.js</strong> - script which is responsible for accordion</li>
+      <li><strong>bootstrap/modal.js</strong> - script which is responsible for modal activation</li>
+      <li><strong>bootstrap/dropdown.js</strong> - script which is responsible for dropdowns</li>
+      <li><strong>bootstrap/tab.js</strong> - script which is responsible for tabs</li>
+      <li><strong>jquery.visible.min.js</strong> - script checks if the element in browser viewport and applies animation</li>
+      <li><strong>jquery.knob.js</strong> - shows circilar charts for percentage showcase</li>
+      <li><strong>jquery.scrollUp.min.js</strong> - scripts that shows a scroll to top link</li>
+      <li><strong>jquery.application.js</strong> - your main application javascript file</li>
+    </ul>
+    <p>Once again, thank you so much for purchasing this theme. As I said at the beginning, I'd be glad to help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist. If you have a more general question relating to the themes on ThemeForest, you might consider visiting the forums and asking your question in the "Item Discussion" section.</p>
+  </div>
+</div>
+        <script src='js/vendor/jquery-1.10.2.min.js'></script>
+<script src='js/plugins.js'></script>
+<script src='js/main.js'></script>
+    </body>
+</html>

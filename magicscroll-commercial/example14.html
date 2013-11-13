@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Magic Scroll: Surprise</title>
+	
+        <!-- link to magicscroll.css file -->      
+        <link rel="stylesheet" type="text/css" href="magicscroll/magicscroll.css" media="screen"/>      
+        <style type="text/css">
+            .MagicScrollItem {
+                padding: 0 20px;
+            }
+            .MagicScroll {
+                float:left;
+                margin-right: 3px;
+            }
+        </style>
+		<!-- link to magicscroll.js file -->
+		<script src="magicscroll/magicscroll.js" type="text/javascript"></script>
+		<script type="text/javascript">
+            var loaded = {
+                'scroll1': false,
+                'scroll2': false,
+                'scroll3': false
+            }
+
+            MagicScroll.options = {
+                'arrows': false,
+                'speed': 0,
+                'item-tag': 'img',
+                'direction': 'bottom',
+                // add onload callback
+                'onload': function(scroll) {
+                    // current scroll was loaded
+                    loaded[scroll.id] = true;
+
+                    // ensure that all scrolls was loaded
+                    if(loaded.scroll1 && loaded.scroll2 && loaded.scroll3) {
+                        $mjs('scrollIt').innerHTML = 'Scroll IT!';
+                        // enable scrollit button
+                        $mjs('scrollIt').disabled = '';
+                    }
+                }
+            };
+
+            var load = (function() {
+                // disable scroll button
+                $mjs('scrollIt').disabled = 'disabled';
+
+                // images that will be used for scroll
+                var images = [
+                    'images/yummy1.jpg',
+                    'images/yummy2.jpg',
+                    'images/yummy3.jpg',
+                    'images/yummy4.jpg',
+                    'images/yummy5.jpg',
+                    'images/yummy6.jpg'
+                ];
+
+                // this function needed to randomize array
+                function rand() {
+                    return Math.round(Math.random()) - 0.5;
+                }
+
+                var k = 1, c, imgs = [], div;
+                while(k < 4) {
+                    c = 0;
+                    // create scroll div
+                    div = magicJS.$new('div', {'id': 'scroll' + k, 'class': 'MagicScroll msborder vertical'});
+                    while(c < 6 * (k + 3)) {
+                        // clone and shufle images array if needed
+                        if(!imgs.length) {
+                            imgs = images.join('|').split('|').sort(rand);
+                        }
+                        // append next image
+                        div.appendChild(magicJS.$new('img', {'src': imgs.shift(), 'onclick': 'jump();'}));
+                        c++;
+                    }
+                    // append scroll
+                    $mjs('wrapper').appendChild(div);
+                    k++;
+                }
+
+                // init scrolls
+                MagicScroll.init();
+
+            });
+
+            // return random value beetwen a and b (including a and b)
+            function random(a, b) {
+                return Math.floor(Math.random() * (b+1)) + a;
+            }
+
+            function jump() {
+                // disable scroll button
+                $mjs('scrollIt').disabled = 'disabled';
+                var k = 0, c, s, div;
+                while(k < 3) {
+                    c = 6 * (k + 4);
+                    MagicScroll.jump('scroll' + (k+1), {
+                        // check random step
+                        target: '+' + (c - (c * 2 / 3 + random(0, c / 6) - 1)),
+                        direction: 'backward',
+                        duration: 1500 + k * 100,
+                        // enable scroll button by callback
+                        callback: k == 2 ? function(){$mjs('scrollIt').disabled = ''} : magicJS.$F
+                    });
+                    k++;
+                }
+            }
+
+            $mjs(document).je1('domready', load);
+        </script>
+		
+	<style type="text/css"><!--
+		body {background:#fff; margin:0; padding:0; font-size: 100%;}
+		body, td {font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif; line-height: 1.5em;}
+		.MagicScroll { font-size:12px;}
+		h1 {font-size:1.5em; font-weight:normal; color:#555;}
+		h2 {font-size:1.3em; font-weight:normal; color:#555;}
+		h2.caption {margin: 2.5em 0 0;}
+        h3 {font-size:1.2em; font-weight:normal; color:#555;}
+		a {outline: none;}
+		table {margin:0; padding:0; border-collapse: collapse;}
+		th {background:#CCC; text-align: left; padding: 2px 4px; font-weight: normal;}
+		td {vertical-align: top; border: 1px;}
+		img {border:0;}
+		.leftcol {background:#EDF6CA; padding: 20px;}
+		.nav {width: 180px;}
+		.nav h2 {background: #658F11; margin:10px 0 0 0; padding: 3px 3px 5px 10px; font-size: 0.9em; color:#FFF;}
+		.nav ul {list-style-type: none; padding: 0 0 10px 0; margin:0 0 20px; background:#99CC33;}
+		.nav li a {text-decoration: none; display: block; padding: 3px 3px 3px 10px; margin: 0; font-size: 0.9em; color:#FFF; zoom: 1;}
+		.nav li a:hover {background: #B5DF61;}
+		.active {font-weight: bold;}
+		.arrow {text-align: right;}
+		.menuTd a {color:#fff; font-weight:bold;}
+		code, .code {font-size:12px; line-height:18px; margin:10px 0; display:block; padding:3px; border:1px solid #aaa;}
+        code {padding: 3px 10px;}
+		span.r {color:red;}
+		span.g {color:green;}
+		span.b {color:blue;}
+		table.tbl {background:#aaa; margin-bottom: 20px; font-size: 0.9em; border: 1px solid #999;}
+		caption {text-align: left; padding: 4px 12px; background: #999; color: #fff; font-size: 1.1em; margin: 0 0 0 -1px;}
+		caption a {color: #fff; padding: 2px;}
+		caption a:hover {background:#FFF; color: #999;}
+		.tbl th {background:#eee; padding:4px 8px 4px 16px;}
+        .tbl td {background:#fff; padding:4px 8px 4px 16px; vertical-align:top; border-bottom: 1px #999 solid;}
+		.tbl .tr1 td {background:#fff;}
+		.tbl .tr2 td {background:#f2f2f2;}
+		.mtbl {width:100%; height:100%;}
+		.rTd {padding:20px; width:100%;}
+		.rTd ol.installation li {margin-bottom: 10px;}
+		div.exmpl {margin:0 0 5px 0; font-weight:bold;}
+		.html4strict {border:1px solid #AAAAAA; display:block; font-size:12px; line-height:18px; margin:10px 0pt; padding:3px;}
+		.html4strict .de1, .html4strict .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+		.html4strict {font-family:monospace;}
+		.html4strict .imp {font-weight: bold; color: red;}
+		.html4strict li, .html4strict .li1 {font-weight: normal; vertical-align:top;}
+		.html4strict .ln {width:1px; text-align:right; margin:0; padding:0 2px; vertical-align:top;}
+		.html4strict .li2 {font-weight: bold; vertical-align:top;}
+		.html4strict .kw2 {color: #000000; font-weight: bold;}
+		.html4strict .kw3 {color: #000066;}
+		.html4strict .es0 {color: #000099; font-weight: bold;}
+		.html4strict .br0 {color: #66cc66;}
+		.html4strict .sy0 {color: #66cc66;}
+		.html4strict .st0 {color: #ff0000;}
+		.html4strict .nu0 {color: #cc66cc;}
+		.html4strict .sc-1 {color: #808080; font-style: italic;}
+		.html4strict .sc0 {color: #00bbdd;}
+		.html4strict .sc1 {color: #ddbb00;}
+		.html4strict .sc2 {color: #009900;}
+		.html4strict .ln-xtra, .html4strict li.ln-xtra, .html4strict div.ln-xtra {background-color: #ffc;}
+		.html4strict span.xtra {display:block;}
+        p.buttons {float: right; margin: -40px 0px 10px 0} 
+        p.buttons a { 
+                background: #FA9C0F; padding: 4px 10px 4px 12px; 
+                margin-right: 6px; font-size: 1em; color:#fff; text-decoration: none; 
+                line-height: 1em;outline: none; border: 1px solid #CF7E00
+        } 
+        p.buttons a:hover {background: #FFBA4F} 
+	--></style>
+</head>
+<body>
+<table class="mtbl">
+<tr>
+    <td class="leftcol">
+		<div class="nav">
+			<h2>Magic Scroll&#8482;</h2>
+			<ul>
+				<li><a  href="index.html">Overview</a></li>
+				<li><a  href="installation.html">Installation</a></li>
+				<li><a  href="parameters.html">Parameters</a></li>
+				<li><a  href="wizard.html">Settings wizard</a></li>
+			</ul>
+		</div>
+		<div class="nav">
+			<h2>Examples</h2>
+			<ul>
+				<li><a  href="example1.html">Default</a></li>
+				<li><a  href="example2.html">Text or images</a></li>
+				<li><a  href="example3.html">Position</a></li>
+				<li><a  href="example4.html">Items in view</a></li>
+				<li><a  href="example5.html">Speed</a></li>
+				<li><a  href="example6.html">Duration</a></li>
+				<li><a  href="example7.html">Loop</a></li>
+				<li><a  href="example8.html">Arrows</a></li>
+				<li><a  href="example9.html">Slider</a></li>
+				<li><a  href="example10.html">Spacing</a></li>
+				<li><a  href="example11.html">Text news</a></li>
+				<li><a  href="example12.html">API/Callbacks</a></li>
+				<li><a  href="example13.html">HTML Content</a></li>
+				<li><a class="active" href="example14.html">Surprise</a></li>
+				<li><a  href="example15.html">Combinations</a></li>
+			</ul>
+		</div>
+	</td>
+	<td class="rTd">
+		<h1>Surprise</h1>
+        <p class="buttons"><a href="http://www.magictoolbox.com/buy/magicscroll/">Buy now&nbsp;&nbsp;&pound;29</a> <a href="http://www.magictoolbox.com/support/">Get support</a></p>
+        <p></p>
+        
+        <button id="scrollIt" disabled="disabled" onclick="jump()">Loading...</button>
+        <div id="wrapper"></div>
+        
+        <div style="clear:both;height:0;font-size:0;line-height:0;"></div><br/>
+        
+        <div class="html4strict" style="font-family:monospace;"><ol><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">html</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">head</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">title</span>&gt;</span>Magic Scroll: Surprise<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">title</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; </div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #808080; font-style: italic;">&lt;!-- link to magicscroll.css file --&gt;</span> &nbsp; &nbsp; &nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">link</span> <span style="color: #000066;">rel</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;stylesheet&quot;</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/css&quot;</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magicscroll/magicscroll.css&quot;</span> <span style="color: #000066;">media</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;screen&quot;</span><span style="color: #66cc66;">/</span>&gt;</span> &nbsp; &nbsp; &nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">style</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/css&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .MagicScrollItem {</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 0 20px;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .MagicScroll {</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; float:left;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-right: 3px;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">style</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #808080; font-style: italic;">&lt;!-- link to magicscroll.js file --&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">script</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;magicscroll/magicscroll.js&quot;</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/javascript&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">script</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">script</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/javascript&quot;</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var loaded = {</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'scroll1': false,</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'scroll2': false,</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'scroll3': false</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MagicScroll.options = {</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'arrows': false,</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'speed': 0,</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'item-tag': 'img',</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'direction': 'bottom',</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // add onload callback</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'onload': function(scroll) {</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // current scroll was loaded</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; loaded[scroll.id] = true;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // ensure that all scrolls was loaded</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(loaded.scroll1 <span style="color: #ddbb00;">&amp;&amp; loaded.scroll2 &amp;&amp; loaded.scroll3) {</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ddbb00;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$mjs('scrollIt').innerHTML = 'Scroll IT!';</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // enable scrollit button</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $mjs('scrollIt').disabled = '';</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var load = (function() {</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // disable scroll button</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $mjs('scrollIt').disabled = 'disabled';</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // images that will be used for scroll</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var images = [</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'images/yummy1.jpg',</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'images/yummy2.jpg',</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'images/yummy3.jpg',</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'images/yummy4.jpg',</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'images/yummy5.jpg',</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'images/yummy6.jpg'</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ];</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // this function needed to randomize array</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; function rand() {</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return Math.round(Math.random()) - 0.5;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var k = 1, c, imgs = [], div;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; while(k <span style="color: #009900;">&lt; <span style="color: #cc66cc;">4</span><span style="color: #66cc66;">&#41;</span> <span style="color: #66cc66;">&#123;</span></span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;c <span style="color: #66cc66;">=</span> <span style="color: #cc66cc;">0</span>;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">//</span> create scroll div</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;div <span style="color: #66cc66;">=</span> magicJS.$new<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'div'</span>, <span style="color: #66cc66;">&#123;</span><span style="color: #ff0000;">'id'</span>: <span style="color: #ff0000;">'scroll'</span> + k, <span style="color: #ff0000;">'class'</span>: <span style="color: #ff0000;">'MagicScroll msborder vertical'</span><span style="color: #66cc66;">&#125;</span><span style="color: #66cc66;">&#41;</span>;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;while<span style="color: #66cc66;">&#40;</span>c &lt; <span style="color: #cc66cc;">6</span> * <span style="color: #66cc66;">&#40;</span>k + <span style="color: #cc66cc;">3</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span> <span style="color: #66cc66;">&#123;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">//</span> clone and shufle images array if needed</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if<span style="color: #66cc66;">&#40;</span>!imgs.length<span style="color: #66cc66;">&#41;</span> <span style="color: #66cc66;">&#123;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;imgs <span style="color: #66cc66;">=</span> images.join<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'|'</span><span style="color: #66cc66;">&#41;</span>.split<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'|'</span><span style="color: #66cc66;">&#41;</span>.sort<span style="color: #66cc66;">&#40;</span>rand<span style="color: #66cc66;">&#41;</span>;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">&#125;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">//</span> append next image</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;div.appendChild<span style="color: #66cc66;">&#40;</span>magicJS.$new<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'img'</span>, <span style="color: #66cc66;">&#123;</span><span style="color: #ff0000;">'src'</span>: imgs.shift<span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>, <span style="color: #ff0000;">'onclick'</span>: <span style="color: #ff0000;">'jump();'</span><span style="color: #66cc66;">&#125;</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;c++;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">&#125;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">//</span> append scroll</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$mjs<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'wrapper'</span><span style="color: #66cc66;">&#41;</span>.appendChild<span style="color: #66cc66;">&#40;</span>div<span style="color: #66cc66;">&#41;</span>;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;k++;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">&#125;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">//</span> init scrolls</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MagicScroll.init<span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">&#125;</span><span style="color: #66cc66;">&#41;</span>;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">//</span> return random <span style="color: #000066;">value</span> beetwen a and b <span style="color: #66cc66;">&#40;</span>including a and b<span style="color: #66cc66;">&#41;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;function random<span style="color: #66cc66;">&#40;</span>a, b<span style="color: #66cc66;">&#41;</span> <span style="color: #66cc66;">&#123;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return Math.floor<span style="color: #66cc66;">&#40;</span>Math.random<span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span> * <span style="color: #66cc66;">&#40;</span>b+<span style="color: #cc66cc;">1</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span> + a;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">&#125;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;function jump<span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span> <span style="color: #66cc66;">&#123;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">//</span> disable scroll button</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$mjs<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'scrollIt'</span><span style="color: #66cc66;">&#41;</span>.<span style="color: #000066;">disabled</span> <span style="color: #66cc66;">=</span> <span style="color: #ff0000;">'disabled'</span>;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;var k <span style="color: #66cc66;">=</span> <span style="color: #cc66cc;">0</span>, c, s, div;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;while<span style="color: #66cc66;">&#40;</span>k &lt; <span style="color: #cc66cc;">3</span><span style="color: #66cc66;">&#41;</span> <span style="color: #66cc66;">&#123;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;c <span style="color: #66cc66;">=</span> <span style="color: #cc66cc;">6</span> * <span style="color: #66cc66;">&#40;</span>k + <span style="color: #cc66cc;">4</span><span style="color: #66cc66;">&#41;</span>;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MagicScroll.jump<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'scroll'</span> + <span style="color: #66cc66;">&#40;</span>k+<span style="color: #cc66cc;">1</span><span style="color: #66cc66;">&#41;</span>, <span style="color: #66cc66;">&#123;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">//</span> check random step</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #000066;">target</span>: <span style="color: #ff0000;">'+'</span> + <span style="color: #66cc66;">&#40;</span>c - <span style="color: #66cc66;">&#40;</span>c * <span style="color: #cc66cc;">2</span> <span style="color: #66cc66;">/</span> <span style="color: #cc66cc;">3</span> + random<span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">0</span>, c <span style="color: #66cc66;">/</span> <span style="color: #cc66cc;">6</span><span style="color: #66cc66;">&#41;</span> - <span style="color: #cc66cc;">1</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span>,</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;direction: <span style="color: #ff0000;">'backward'</span>,</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;duration: <span style="color: #cc66cc;">1500</span> + k * <span style="color: #cc66cc;">100</span>,</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">//</span> enable scroll button by callback</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;callback: k <span style="color: #66cc66;">==</span> <span style="color: #cc66cc;">2</span> ? function<span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#123;</span>$mjs<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'scrollIt'</span><span style="color: #66cc66;">&#41;</span>.<span style="color: #000066;">disabled</span> <span style="color: #66cc66;">=</span> <span style="color: #ff0000;">''</span><span style="color: #66cc66;">&#125;</span> : magicJS.$F</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">&#125;</span><span style="color: #66cc66;">&#41;</span>;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;k++;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">&#125;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #66cc66;">&#125;</span></span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;$mjs<span style="color: #66cc66;">&#40;</span>document<span style="color: #66cc66;">&#41;</span>.je1<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'domready'</span>, load<span style="color: #66cc66;">&#41;</span>;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;"> &nbsp; &nbsp; &nbsp; &nbsp;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">script</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; </div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">head</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">body</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; </div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">button</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;scrollIt&quot;</span> <span style="color: #000066;">disabled</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;disabled&quot;</span> <span style="color: #000066;">onclick</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;jump()&quot;</span>&gt;</span>Loading...<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">button</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;wrapper&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; </div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">body</span>&gt;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">html</span>&gt;</span></div></li>
+</ol></div>
+	</td>
+</tr></table></body></html>
