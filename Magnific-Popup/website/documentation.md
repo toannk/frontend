@@ -14,9 +14,7 @@ buildtool: true
 
 ---
 
-
 <div id="documentation-intro">
-  <style type="text/css">#main-wrapper{background: #FFF;}</style>
   <h1><a href="http://dimsemenov.com/plugins/magnific-popup/">Magnific Popup</a> Documentation</h1>
   <p><a href="https://github.com/dimsemenov/Magnific-Popup/">Project on Github</a> &middot; <a href="#mfp-build-tool" class="mfp-build-tool-link">Build tool</a> &middot; <a href="http://twitter.com/dimsemenov">Twitter of developer</a> &middot; <a href="http://dimsemenov.com/subscribe.html">Newsletter of developer</a></p>
 </div>
@@ -29,7 +27,7 @@ Here you can find the guide on how to use Magnific Popup. Besides this docs page
 
 Please ask general questions through <a href="http://stackoverflow.com/questions/ask?tags=magnific-popup">StackOverflow</a> tagged with `magnific-popup`.
 
-# &nbsp;
+# magnific popup docs
 
 * This will become a table of contents (this text will be scraped).
 {:toc}
@@ -607,7 +605,7 @@ If set to `true` popup is aligned to top instead of to center. (basically all th
 
 <code class="def">auto</code>
 
-Options defines how popup content position property. Can be `"auto"`, `true` or `false`.  If set to `true` - fixed position will be used, to `false` - absolute position based on current scroll. If set to `"auto"` popup will automatically disable this option when browser doesn't support fixed position properly.
+Popup content position. Can be `"auto"`, `true` or `false`.  If set to `true` - fixed position will be used, to `false` - absolute position based on current scroll. If set to `"auto"` popup will automatically disable this option when browser doesn't support fixed position properly.
 
 ### fixedBgPos
 
@@ -635,13 +633,17 @@ Delay before popup is removed from DOM. Used for the [animation](#animation).
 
 Markup of close button. %title% will be replaced with option `tClose`.
 
+### prependTo 
 
+<code class="def">document.body</code>
+
+The DOM element to which popup will be added. Useful when you're using Asp.NET where popup should be inside `form`. Option available since 2013/12/04.
 
 
 
 ## Gallery
 
-Basically all galery module does is allows you to switch content of popup and adds navigation arrows. It can switch and mix any types of content, not just images. 
+Basically all galery module does is allows you to switch content of popup and adds navigation arrows. It can switch and mix any types of content, not just images. Gallery options: 
 
 {% highlight javascript %}
 gallery: {
@@ -659,19 +661,47 @@ gallery: {
 }
 {% endhighlight %}
 
-### Multiple galleries
-
-To have multiple galleries on a page, you need to create a new instance of Magnific Popup for each seperate gallery. The below example can be used:
+Example:
 
 {% highlight javascript %}
-$('.gallery').each(function() { // the containers for all your galleries should have the class gallery
+// This will create a single gallery from all elements that have class "gallery-item"
+$('.gallery-item').magnificPopup({
+  type: 'image',
+  gallery:{
+    enabled:true
+  }
+});
+{% endhighlight %}
+
+### Multiple galleries
+
+To have multiple galleries on a page, you need to create a new instance of Magnific Popup for each seperate gallery. For example
+
+{% highlight html %}
+<div class="gallery">
+    <a href="path-to-image.jpg">Open image 1 (gallery #1)</a>
+    <a href="path-to-image.jpg">Open image 2 (gallery #1)</a>
+</div>
+<div class="gallery">
+    <a href="path-to-image.jpg">Open image 1 (gallery #2)</a>
+    <a href="path-to-image.jpg">Open image 2 (gallery #2)</a>
+    <a href="http://vimeo.com/123123" class="mfp-iframe">Open video (gallery #2). Class mfp-iframe forces "iframe" content type on this item.</a>
+</div>
+{% endhighlight %}
+
+{% highlight javascript %}
+$('.gallery').each(function() { // the containers for all your galleries
     $(this).magnificPopup({
-        delegate: 'a', // the container for each your gallery items
+        delegate: 'a', // the selector for gallery item
         type: 'image',
-        gallery:{enabled:true}
+        gallery: {
+          enabled:true
+        }
     });
 }); 
 {% endhighlight %}
+
+You don't necessarily need to use `delegate` option, it can be just `$(this).find('a').magnificPopup( ...`.
 
 ### Lazy-loading
 
@@ -899,8 +929,11 @@ callbacks: {
     console.log('Start of popup initialization');
   },
   elementParse: function(item) {
+    // Function will fire for each target element
+    // "item.el" is a target DOM element (if present)
+    // "item.src" is a source that you may modify
+
     console.log('Parsing content. Item object that is being parsed:', item);
-    // feel free to modify here item object
   },
   change: function() {
     console.log('Content changed');
@@ -936,12 +969,6 @@ callbacks: {
     // "data.text" - text that will be displayed (e.g. "Loading...")
     // you may modify this properties to change current status or its text dynamically
   },
-  elementParse: function(item) {
-    console.log('Parsing element:', item);
-    // triggers only once for each item
-    // here you may modify URL, type, or any other data
-  },  
-
   imageLoadComplete: function() {
     // fires when image in current popup finished loading
     // avaiable since v0.9.0
@@ -1125,6 +1152,46 @@ $('.some-button').magnificPopup({
 
 See [example on CodePen](http://codepen.io/dimsemenov/pen/JGjHK).
 
+### How to override some function without modifying the source files?
+
+Rewrite the function that you wish to modify by editing Magnific Popup object, you can access it like so `$.magnificPopup.instance`. For example to override function that goes to "next" item in gallery:
+
+{% highlight javascript %}
+// add this code after popup JS file is included
+$.magnificPopup.instance.next = function() {
+
+  // Do something
+
+  // You may call parent ("original") method like so:
+  $.magnificPopup.proto.next.call(this /*, optional arguments */);
+};
+{% endhighlight %}
+
+You may override any public function, just note that this change applies globally.
+
+### How to add spinner indicator instead of "Loading..." text?
+
+Just style element with class `.mfp-preloader`. [Example on CodePen](http://codepen.io/dimsemenov/pen/aKwxt). [Another example](http://codepen.io/dimsemenov/pen/HdjtL) (if you want to show image only after its fully loaded).
+
+
+## Known issues
+
+### When popup is opened scrollbar of window disappears and creates empty space or shifts some fixed-positioned menu (or whatever)
+
+Solution 1: add [overflowY:'scroll'](#overflowy) option to force the scrollbar. Solution 2: use open/close popup callbacks to apply custom styling to menu that behaves incorrectly.
+
+### Text input in [Select2](http://ivaynberg.github.io/select2/) plugin is inactive when added inside popup
+
+Refer to [this discussion on GitHub](https://github.com/dimsemenov/Magnific-Popup/issues/280).
+
+
+
+
+
 <h2 id="contribute">Make Magnific Popup better!</h2>
 
-Improve this documentation page <a href="https://github.com/dimsemenov/Magnific-Popup/edit/master/website/documentation.md">via GitHub</a> (simply submit commit). Any improvements, including your own CodePen examples are very welcome.
+Improve this documentation page (simply submit commit <a href="https://github.com/dimsemenov/Magnific-Popup/edit/master/website/documentation.md">via GitHub</a>). Any improvements, including your own CodePen examples are very welcome. And, lastly, don't forget to star the script on GitHub:
+
+<div>
+  <iframe src="http://ghbtns.com/github-btn.html?user=dimsemenov&amp;repo=magnific-popup&amp;type=watch&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30">&nbsp;</iframe>
+</div>

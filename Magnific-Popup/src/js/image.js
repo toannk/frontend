@@ -20,11 +20,15 @@ $.magnificPopup.registerModule('image', {
 	options: {
 		markup: '<div class="mfp-figure">'+
 					'<div class="mfp-close"></div>'+
-					'<div class="mfp-img"></div>'+
-					'<div class="mfp-bottom-bar">'+
-						'<div class="mfp-title"></div>'+
-						'<div class="mfp-counter"></div>'+
-					'</div>'+
+					'<figure>'+
+						'<div class="mfp-img"></div>'+
+						'<figcaption>'+
+							'<div class="mfp-bottom-bar">'+
+								'<div class="mfp-title"></div>'+
+								'<div class="mfp-counter"></div>'+
+							'</div>'+
+						'</figcaption>'+
+					'</figure>'+
 				'</div>',
 		cursor: 'mfp-zoom-out-cur',
 		titleSrc: 'title', 
@@ -193,8 +197,12 @@ $.magnificPopup.registerModule('image', {
 				if(el.is('img')) {
 					item.img = item.img.clone();
 				}
-				if(item.img[0].naturalWidth > 0) {
+
+				img = item.img[0];
+				if(img.naturalWidth > 0) {
 					item.hasSize = true;
+				} else if(!img.width) {										
+					item.hasSize = false;
 				}
 			}
 

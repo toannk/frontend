@@ -5,6 +5,7 @@
 
     <title>{{ page.title }}</title>
     
+    <meta charset="utf-8"> 
     <meta name="description" content="{{page.description}}"/>
     <meta name="viewport" content="width = device-width, initial-scale = 1.0" />
     <meta name="author" content="Dmitry Semenov">
@@ -22,6 +23,11 @@
       <link href="dist/magnific-popup.css?v={{site.mfpversion}}" rel="stylesheet" />
     {% else %}
       <link href="site-assets/all.min.css?v={{site.mfpversion}}" rel="stylesheet" />
+    {% endif %}
+
+
+    {% if page.title == 'Magnific Popup Documentation' %}
+    <style type="text/css"> #main-wrapper{background: #FFF;} </style>
     {% endif %}
 
   </head>
