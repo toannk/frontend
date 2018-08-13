@@ -1,0 +1,5 @@
+b. A JSX element renders.
+d. The entire virtual DOM updates.
+c. The virtual DOM "diffs," comparing its current self with its previous self.
+e. Part of the real DOM updates.
+a. The screen looks different than it used to.
